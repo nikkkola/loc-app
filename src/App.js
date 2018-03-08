@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
+import UserDetails from './components/UserDetails/UserDetails.js';
 
 class App extends Component {
   render() {
@@ -16,7 +17,10 @@ class App extends Component {
     };
 
     return (
-      <Page currentUser={alice.name} userBank={alice.bankName} contents={<LetterOfCredit />}/>
+      <div>
+        <Page currentUser={alice.name} userBank={alice.bankName} contents={<LetterOfCredit />}/>
+        <UserDetails name={"dfghjkl"} companyName={"sdsd"} sortCode = {"ddd"} accountNumber = {"ddd"} balance = {"2222"}/>
+      </div>
     );
   }
 }
