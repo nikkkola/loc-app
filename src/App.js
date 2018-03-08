@@ -6,6 +6,30 @@ import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
 import UserDetails from './components/UserDetails/UserDetails.js';
 import LoCCard from './components/LoCCard/LoCCard.js';
 
+const sampleLetter = {
+  letterId: '123456',
+  date: '08/03/2018',
+  applicant: {
+    name: 'Alice',
+    companyName: 'QuickFix IT',
+    sortCode: '12-34-56',
+    accNo: '98765432'
+  },
+  beneficiary: {
+    name: 'Bob',
+    companyName: 'Bob\'s Company',
+    sortCode: '12-34-56',
+    accNo: '98765432'
+  },
+  productDetails: {
+    type: 'Computers',
+    quantity: 100,
+    unitPrice: '£100',
+    totalPrice: '£10000'
+  },
+  rules: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Praesent blandit libero in condimentum facilisis.', 'Aliquam vitae nibh et nisl mollis euismod eget vel justo.', 'Nullam vel turpis tincidunt, cursus metus id, aliquet enim.', 'Nunc ac mauris at dolor vehicula fermentum.', 'Duis pharetra arcu eu metus vehicula pellentesque.']
+};
+
 class App extends Component {
   render() {
 
@@ -22,10 +46,8 @@ class App extends Component {
     );
 
     let locPageContents = (
-      <LetterOfCredit />
+      <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules}/>
     );
-
-
 
     return (
       <Page currentUser={alice.name} userBank={alice.bankName} contents={aliceHomePageContents}/>

@@ -1,0 +1,11 @@
+.Block {
+  background-color: #f2f2f2;
+  text-align: left;
+  width: 10%;
+  height: 10%;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-left: 5%;
+  border:1px solid blue;
+}

@@ -4,12 +4,96 @@ import './letterofcredit.css';
 
 class LetterOfCredit extends Component {
   render() {
-    return (<div>LoC</div>);
+    let applicantNameText = 'Name: ' + this.props.applicant.name;
+    let applicantCompanyNameText = 'Company Name: ' + this.props.applicant.companyName;
+    let applicantSortCodeText = 'Sort Code: ' + this.props.applicant.sortCode;
+    let applicantAccountNumberText = 'Account Number: ' + this.props.applicant.accNo;
+
+    let beneficiaryNameText = 'Name: ' + this.props.beneficiary.name;
+    let beneficiaryCompanyNameText = 'Company Name: ' + this.props.beneficiary.companyName;
+    let beneficiarySortCodeText = 'Sort Code: ' + this.props.beneficiary.sortCode;
+    let beneficiaryAccountNumberText = 'Account Number: ' + this.props.beneficiary.accNo;
+
+    let productType = 'Product Type: ' + this.props.productDetails.type;
+    let productQuantity = 'Product Quantity: ' + this.props.productDetails.quantity;
+    let productUnitPrice = 'Unit Price: ' + this.props.productDetails.unitPrice;
+    let productTotal = 'Total: ' + this.props.productDetails.totalPrice;
+
+    return (
+      <div class="container">
+        <p class="suggestChangeTxt">To suggest a change, click here and edit the contract text</p>
+
+        <div class="letterDetails">
+          <h2>{this.props.letterId}</h2>
+          <p>{this.props.date}</p>
+        </div>
+
+        <div class="letterContent">
+          <div>
+            <h2>Account Information</h2>
+            <p>{applicantNameText}</p>
+            <p>{applicantCompanyNameText}</p>
+            <p>{applicantSortCodeText}</p>
+            <p>{applicantAccountNumberText}</p>
+          </div>
+
+          <div>
+            <h2>Supplier Bank Details</h2>
+            <p>{beneficiaryNameText}</p>
+            <p>{beneficiaryCompanyNameText}</p>
+            <p>{beneficiarySortCodeText}</p>
+            <p>{beneficiaryAccountNumberText}</p>
+          </div>
+
+          <div>
+            <h2>Product Details</h2>
+            <p>{productType}</p>
+            <p>{productQuantity}</p>
+            <p>{productUnitPrice}</p>
+            <p>{productTotal}</p>
+          </div>
+        </div>
+
+        <div class="rules">
+            <h2>Terms and Conditions</h2>
+            <ul>
+              {this.props.rules.map(function(rule) {
+                return <li>{rule}</li>;
+              })}
+            </ul>
+        </div>
+
+        <div class="actions">
+          <button>I accept the application</button>
+          <button>I reject the application</button>
+        </div>
+      </div>
+    );
   }
 }
 
 LetterOfCredit.propTypes = {
-  name: PropTypes.string
+  letterId: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
+  applicant: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    companyName: PropTypes.string.isRequired,
+    sortCode: PropTypes.string.isRequired,
+    accNo: PropTypes.string.isRequired
+  }).isRequired,
+  beneficiary: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    companyName: PropTypes.string.isRequired,
+    sortCode: PropTypes.string.isRequired,
+    accNo: PropTypes.string.isRequired
+  }).isRequired,
+  productDetails: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    unitPrice: PropTypes.string.isRequired,
+    totalPrice: PropTypes.string.isRequired
+  }).isRequired,
+  rules: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default LetterOfCredit;
