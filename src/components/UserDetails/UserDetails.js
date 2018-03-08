@@ -13,13 +13,9 @@ class UserDetails extends React.Component {
       accountNumber: this.props.accountNumber,
       balance: this.props.balance
     }
-
-
   }
 
-  render()
-  {
-
+  render() {
     let nameText = 'Name: ' + this.state.name;
     let companyNameText = 'Company Name: '+ this.state.companyName;
     let sortCodeText = 'Sort Code: ' + this.state.sortCode;
@@ -35,7 +31,6 @@ class UserDetails extends React.Component {
         <p>{balanceText}</p>
       </div>
     );
-
   }
 }
 

@@ -12,13 +12,9 @@ class LoCCard extends React.Component {
       participants: this.props.participants,
       products: this.props.products
     }
-
-
   }
-
-  render()
-  {
-
+  
+  render() {
     let referenceNumberText = 'Ref: ' + this.state.referenceNumber;
     let statusText = this.state.status;
     let participantsText = 'Participants: ' + this.state.participants;
@@ -32,7 +28,6 @@ class LoCCard extends React.Component {
         <button>View Letter Of Credit</button>
       </div>
     );
-
   }
 }
 
