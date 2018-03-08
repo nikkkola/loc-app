@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.letterDetails {
+  align-self: flex-start;
+  padding-left: 10%;
+}
+
+.letterContent {
+  display: flex;
+  justify-content: space-around;
+}
+
+.letterContent > div {
+  /* flex: 1; */
+  text-align: left;
+}
+
+.rules {
+  text-align: left;
+}
+
+.rules > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestChangeTxt {
+  color: grey;
+  font-size: 10pt;
+}
