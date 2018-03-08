@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import UserDetails from './components/UserDetails/UserDetails.js';
+import LoCCard from './components/LoCCard/LoCCard.js';
 
 class App extends Component {
   render() {
@@ -13,6 +14,9 @@ class App extends Component {
         </header>
         <p className="App-intro">
           <UserDetails name={"dfghjkl"} companyName={"sdsd"} sortCode = {"ddd"} accountNumber = {"ddd"} balance = {"2222"}/>
+        </p>
+        <p className="App-intro">
+          <LoCCard referenceNumber={"123456789"} status={"sdsd"} participants = {"dcsdc"} products = {"ssdssc"}/>
         </p>
       </div>
     );
