@@ -16,11 +16,18 @@ class App extends Component {
       "bankName": "Bank of Argentina"
     };
 
+    let aliceHomePageContents = (
+      <UserDetails name={alice.name} companyName={alice.companyName} sortCode = {"98-76-54"} accountNumber = {"12345678"} balance = {"£1049.34"}/>  
+    );
+
+    let locPageContents = (
+      <LetterOfCredit />
+    );
+
+    
+
     return (
-      <div>
-        <Page currentUser={alice.name} userBank={alice.bankName} contents={<LetterOfCredit />}/>
-        <UserDetails name={"dfghjkl"} companyName={"sdsd"} sortCode = {"ddd"} accountNumber = {"ddd"} balance = {"2222"}/>
-      </div>
+      <Page currentUser={alice.name} userBank={alice.bankName} contents={aliceHomePageContents}/>
     );
   }
 }
