@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './page.css';
+import Modal from '../Modal/Modal.js';
 
 class Page extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Page extends Component {
         let username = this.props.currentUser + " - " + this.props.userBank;
         return (
             <div id="pageContainer" className="Page">
+                <Modal />
                 <div className="Username"> {username} </div> 
                 {this.props.contents}
             </div>
