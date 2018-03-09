@@ -17,9 +17,12 @@ class Block extends React.Component {
   {
     return (
       <div className="Block">
-        <p>{this.state.transactionDetails}</p>
-        <p>{this.state.date}</p>
-        <p>{this.state.time}</p>
+        <div className="BlockLine"></div>
+        <div className="BlockText">
+          <p>{this.state.transactionDetails}</p>
+          <p>{this.state.date}</p>
+          <p>{this.state.time}</p>
+        </div>
       </div>
     );
   }

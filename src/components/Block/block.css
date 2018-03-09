@@ -1,11 +1,28 @@
 .Block {
-  background-color: #f2f2f2;
-  text-align: left;
   width: 10%;
-  height: 10%;
+  height: 100%;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.BlockLine {
+  background-color: blue;
+  width: 1%;
+  height: 5%;
   padding-left: 5%;
   padding-top: 5%;
-  padding-bottom: 5%;
-  margin-left: 5%;
-  border:1px solid blue;
+  padding-bottom: 33%;
+  float:left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.BlockText {
+  padding-left: 15%;
+  float:left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
