@@ -4,26 +4,23 @@ import './page.css';
 import Modal from '../Modal/Modal.js';
 
 class Page extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        let username = this.props.currentUser + " - " + this.props.userBank;
-        return (
-            <div id="pageContainer" className="Page">
-                <Modal />
-                <div className="Username"> {username} </div> 
-                {this.props.contents}
-            </div>
-        );
-    }
+  render() {
+    let username = this.props.currentUser + " - " + this.props.userBank;
+    return (
+      <div id="pageContainer" className="Page">
+        <Modal />
+        {this.props.contents}
+      </div>
+    );
+  }
 }
 
 Page.propTypes = {
-    currentUser: PropTypes.string,
-    userBank: PropTypes.string,
-    contents: PropTypes.object
+  contents: PropTypes.object
 }
 
 export default Page;
