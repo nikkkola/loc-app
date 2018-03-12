@@ -1,0 +1,9 @@
+.Alert {
+  width: 10%;
+  height: 5%;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border: 1px solid blue;
+  border-radius: 25px;
+}

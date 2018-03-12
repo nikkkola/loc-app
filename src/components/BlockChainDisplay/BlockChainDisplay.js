@@ -13,8 +13,7 @@ class BlockChainDisplay extends React.Component {
     }
   }
 
-  render()
-  {
+  render() {
     var blocks = [];
       for (var i = 0; i < this.state.transactions.length; i++){
         let transaction = this.state.transactions[i];
