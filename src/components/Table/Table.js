@@ -19,10 +19,10 @@ class Table extends Component {
 					<tbody>
 						<tr className="tableHeaders">
 							<th>Ref Number</th>
-							<th>Submitter Account</th>							
-							<th>Business Name</th>		
-							<th>Date and Time</th>			
-							<th>Status</th>			
+							<th>Submitter Account</th>
+							<th>Business Name</th>
+							<th>Date and Time</th>
+							<th>Status</th>
 						</tr>
 						<tr>
 							<td className="blueText">R123456789</td>
