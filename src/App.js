@@ -50,7 +50,7 @@ class App extends Component {
     );
 
     return (
-      <Page currentUser={alice.name} userBank={alice.bankName} contents={aliceHomePageContents}/>
+      <Page currentUser={alice.name} userBank={alice.bankName} contents={locPageContents}/>
     );
   }
 }

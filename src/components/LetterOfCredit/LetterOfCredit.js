@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './letterofcredit.css';
+import DetailsCard from '../DetailsCard/DetailsCard.js';
 
 class LetterOfCredit extends Component {
   render() {
@@ -20,15 +21,20 @@ class LetterOfCredit extends Component {
     let productTotal = 'Total: ' + this.props.productDetails.totalPrice;
 
     return (
-      <div class="container">
-        <p class="suggestChangeTxt">To suggest a change, click here and edit the contract text</p>
-
+      <div class="LCcontainer">
         <div class="letterDetails">
           <h2>{this.props.letterId}</h2>
           <p>{this.props.date}</p>
         </div>
 
         <div class="letterContent">
+          <DetailsCard type="Person" data={["Application Request"]}/>
+          <DetailsCard type="Person" data={["Supplier Request"]}/>
+          <DetailsCard type="Product" data={["Product Details"]}/>
+        </div>
+
+        <br/>
+        {/* <div class="letterContent">
           <div>
             <h2>Account Information</h2>
             <p>{applicantNameText}</p>
@@ -52,16 +58,12 @@ class LetterOfCredit extends Component {
             <p>{productUnitPrice}</p>
             <p>{productTotal}</p>
           </div>
-        </div>
+        </div> */}
 
         <div class="rules">
-            <h2>Terms and Conditions</h2>
-            <ul>
-              {this.props.rules.map(function(rule) {
-                return <li>{rule}</li>;
-              })}
-            </ul>
+            <DetailsCard type="Rules" data={this.props.rules}/>
         </div>
+
 
         <div class="actions">
           <button>I accept the application</button>
