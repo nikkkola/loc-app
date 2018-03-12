@@ -45,7 +45,7 @@ class CustomerPage extends Component {
 		let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bankName;
    
     let cardsJSX = (<div/>);
-    if(this.state.letter.letterId) {
+    if(this.state.letter) {
       cardsJSX = this.generateCards();
     }
 
