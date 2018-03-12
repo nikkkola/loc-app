@@ -1,8 +1,8 @@
 .Page {
-    height: 100vh;
+	height: -webkit-fill-available;
 }
 
 .Username {
-    float: right;
-    margin: 3vh;
+  float: right;
+  margin: 3vh;
 }

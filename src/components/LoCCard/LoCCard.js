@@ -1,34 +1,38 @@
-
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './loccard.css';
 
-class LoCCard extends React.Component {
+class LoCCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      referenceNumber: this.props.referenceNumber,
-      status: this.props.status,
-      participants: this.props.participants,
-      products: this.props.products
+      letter: {}
     }
   }
-  
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      letter: nextProps.letter
+    });
+  }
+
   render() {
-    let referenceNumberText = 'Ref: ' + this.state.referenceNumber;
-    let statusText = this.state.status;
-    let participantsText = 'Participants: ' + this.state.participants;
-    let productsText = 'Products: ' + this.state.products;
+    let referenceNumberText = 'Ref: ' + this.state.letter.letterId;
+    let participantsText = 'Participants: ' + this.state.letter.applicant + ', ' + this.state.letter.beneficiary;
+    let productsText = 'Product Type: ';
     return (
       <div className="LoCCard">
-        <p>{referenceNumberText}</p>
-        <p>{statusText}</p>
+        <h3>{referenceNumberText}</h3>
         <p>{participantsText}</p>
         <p>{productsText}</p>
-        <button>View Letter Of Credit</button>
+        <button className="viewButton">View Letter Of Credit</button>
       </div>
     );
   }
+}
+
+LoCCard.propTypes = {
+  letter: PropTypes.object  
 }
 
 export default LoCCard;

@@ -10,8 +10,14 @@ class UserDetails extends Component {
       companyName: this.props.companyName,
       sortCode: this.props.sortCode,
       accountNumber: this.props.accountNumber,
-      balance: this.props.balance
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ 
+      name: nextProps.name, 
+      companyName: nextProps.companyName
+    });
   }
 
   render() {
@@ -19,15 +25,13 @@ class UserDetails extends Component {
     let companyNameText = 'Company Name: '+ this.state.companyName;
     let sortCodeText = 'Sort Code: ' + this.state.sortCode;
     let accountNumberText = 'Account Number: ' + this.state.accountNumber;
-    let balanceText = 'Balance: ' + this.state.balance;
     return (
       <div className="UserDetails">
-        <h1>Business Account</h1>
+        <h2>Business Account</h2>
         <p>{nameText}</p>
         <p>{companyNameText}</p>
         <p>{sortCodeText}</p>
         <p>{accountNumberText}</p>
-        <p>{balanceText}</p>
       </div>
     );
   }
@@ -38,7 +42,6 @@ UserDetails.propTypes = {
   companyName: PropTypes.string.isRequired,
   sortCode: PropTypes.string.isRequired,
   accountNumber: PropTypes.string.isRequired,
-  balance: PropTypes.string.isRequired
 }
 
 export default UserDetails;

@@ -3,9 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
-import UserDetails from './components/UserDetails/UserDetails.js';
-import LoCCard from './components/LoCCard/LoCCard.js';
-import Table from './components/Table/Table.js';
+import CustomerPage from './components/CustomerPage/CustomerPage.js';
+import EmployeePage from './components/EmployeePage/EmployeePage.js';
 
 const sampleLetter = {
   letterId: '123456',
@@ -34,30 +33,12 @@ const sampleLetter = {
 class App extends Component {
   render() {
 
-    let alice = {
-      "$class": "org.acme.loc.Customer",
-      "companyName": "QuickFix IT",
-      "personId": "alice",
-      "name": "Alice",
-      "bankName": "Bank of Argentina"
-    };
-
-    let aliceHomePageContents = (
-      <UserDetails name={alice.name} companyName={alice.companyName} sortCode = {"98-76-54"} accountNumber = {"12345678"} balance = {"£1049.34"}/>
-    );
-
-    let matiasHomePageContents = (
-      <div>
-        <Table />
-      </div>
-    )
-    
     let locPageContents = (
       <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules}/>
     );
 
     return (
-      <Page contents={matiasHomePageContents}/>
+      <EmployeePage />
     );
   }
 }
