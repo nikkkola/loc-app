@@ -1,0 +1,30 @@
+.cardContainer {
+  background-color: white;
+  box-shadow: 0 0 5px #ddd;
+  border-radius: 1px;
+  padding: 20px;
+  text-align: left;
+}
+
+.cardContainer > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cardContainer > h4 {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.subheadingSpan {
+  float: left;
+  clear: left;
+}
+
+.topHeading {
+  float: left;
+  clear: left;
+  color: #ccc;
+}

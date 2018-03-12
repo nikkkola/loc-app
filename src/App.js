@@ -51,7 +51,7 @@ class App extends Component {
         <Table />
       </div>
     )
-    
+
     let locPageContents = (
       <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules}/>
     );

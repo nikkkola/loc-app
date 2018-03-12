@@ -13,7 +13,7 @@ class LoCCard extends React.Component {
       products: this.props.products
     }
   }
-  
+
   render() {
     let referenceNumberText = 'Ref: ' + this.state.referenceNumber;
     let statusText = this.state.status;
