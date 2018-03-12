@@ -5,6 +5,7 @@ import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
 import UserDetails from './components/UserDetails/UserDetails.js';
 import LoCCard from './components/LoCCard/LoCCard.js';
+import Table from './components/Table/Table.js';
 
 const sampleLetter = {
   letterId: '123456',
@@ -45,12 +46,18 @@ class App extends Component {
       <UserDetails name={alice.name} companyName={alice.companyName} sortCode = {"98-76-54"} accountNumber = {"12345678"} balance = {"£1049.34"}/>
     );
 
+    let matiasHomePageContents = (
+      <div>
+        <Table />
+      </div>
+    )
+
     let locPageContents = (
       <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules}/>
     );
 
     return (
-      <Page currentUser={alice.name} userBank={alice.bankName} contents={locPageContents}/>
+      <Page contents={matiasHomePageContents}/>
     );
   }
 }
