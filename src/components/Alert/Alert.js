@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import './alert.css';
@@ -21,6 +20,11 @@ class Alert extends React.Component {
       </div>
     );
   }
+}
+
+Alert.propTypes = {
+  alertType: PropTypes.string,
+  alertMessage: PropTypes.string
 }
 
 export default Alert;

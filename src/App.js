@@ -32,7 +32,7 @@ const sampleLetter = {
 
 const pageContents = {
   ALICE: "ALICE",
-  BOA: "BOA",
+  MATIAS: "MATIAS",
   LOC: "LOC"
 }
 
@@ -56,6 +56,12 @@ class App extends Component {
     })
   }
 
+  goToMatiasScreen() {
+    this.setState({
+      currentPage: pageContents.MATIAS
+    });
+  }
+
   render() {
     let locPageContents = (
       <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules} callback={this.goToAliceScreen.bind(this)}/>
@@ -63,19 +69,17 @@ class App extends Component {
 
     if(this.state.currentPage == pageContents.ALICE) {
       return (
-        <CustomerPage callback={this.goToLetterScreen.bind((this))}/>
+        <CustomerPage switchUser={this.goToMatiasScreen.bind((this))} callback={this.goToLetterScreen.bind((this))}/>
       );
-    } else if(this.state.currentPage == pageContents.BOA) {
+    } else if(this.state.currentPage == pageContents.MATIAS) {
       return (
-        <EmployeePage />
+        <EmployeePage switchUser={this.goToAliceScreen.bind((this))} callback={this.goToLetterScreen.bind((this))}/>
       );
     } else {
       return(
         <Page contents={locPageContents} />
       );
     }
-
-    
   }
 }
 

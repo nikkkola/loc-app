@@ -5,20 +5,11 @@ import './loccard.css';
 class LoCCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      letter: {}
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      letter: nextProps.letter
-    });
   }
   
   render() {
-    let referenceNumberText = 'Ref: ' + this.state.letter.letterId;
-    let participantsText = 'Participants: ' + this.state.letter.applicant + ', ' + this.state.letter.issuingBank + ', ' + this.state.letter.beneficiary + ', ' + this.state.letter.confirmingBank;
+    let referenceNumberText = 'Ref: ' + this.props.letter.letterId;
+    let participantsText = 'Participants: ' + this.props.letter.applicant + ', ' + this.props.letter.issuingBank + ', ' + this.props.letter.beneficiary + ', ' + this.props.letter.confirmingBank;
     let productsText = 'Product Type: ';
     return (
       <div className="LoCCard">

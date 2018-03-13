@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.loadingSpan {
+  margin: auto;
+  color: white;
+}
+
 .flexDiv {
   display: flex;
   flex-direction: row;
@@ -22,6 +27,10 @@
   font-weight: lighter;
   font-size: 90%;
   color: white;
+}
+
+.cUsername:hover {
+  cursor: pointer;
 }
 
 .cMenuItems {
@@ -44,6 +53,12 @@
   margin-left: 6vh;
   margin-top: 10vh;
   color: white;
+}
+
+.alertsDiv {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
 }
 
 .locDiv {

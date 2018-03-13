@@ -6,12 +6,14 @@ import Page from '../Page/Page.js'
 import Table from '../Table/Table.js';
 
 
-class CustomerPage extends Component {
+class EmployeePage extends Component {
   constructor(props) {
 		super(props)
 		this.state = {
 			userDetails: {},
-			letter: {}
+      letters: [],
+      switchUser: this.props.switchUser,
+      callback: this.props.callback
 		}
 	}
 
@@ -23,41 +25,74 @@ class CustomerPage extends Component {
       });
     })
     .catch(error => {
-          
+      console.log(error);
     });
     axios.get('http://localhost:3000/api/LetterOfCredit')
     .then(response => {
       this.setState ({
-        letter: response.data[0]
+        letters: response.data
       });
     })
     .catch(error => {
-        
+      console.log(error);
     });
 	}
 
-  render() {
-    let username = this.state.userDetails.name + ", Employee at  " + this.state.userDetails.bankName;
+  generateRow(i) {
     return (
-      <div id="employeePageContainer" className="ePageContainer">
-        <div id="eHeaderDiv" className="flexDiv eHeaderDiv">
-          <span className="eUsername"> {username} </span>
-          <div id="eMenu" className="eMenuItems">
-            <span> Change account details </span>
-            <span> View Transaction History </span>
-            <span> Make Transaction </span>
-            <span> Viewing all Business Acccounts </span>
+			<tr>
+				<td className="blueText">{this.state.letters[i].letterId}</td>
+				<td>Alice Hamilton</td>
+				<td>QuickFix IT</td>
+				<td>Yesterday</td>
+				<td>{this.state.letters[i].status}</td>
+			</tr>
+		);
+  }
+
+  render() {
+    if(this.state.letters.length) {
+      let username = this.state.userDetails.name + ", Employee at  " + this.state.userDetails.bankName;
+      
+      let rowsJSX = [];
+      if(this.state.letters.length) {
+        for(let i = 0; i < this.state.letters.length; i++) {
+          rowsJSX.push(this.generateRow(i))
+        }
+      }
+      
+      return (
+        <div id="employeePageContainer" className="ePageContainer">
+          <div id="eHeaderDiv" className="flexDiv eHeaderDiv">
+            <span className="eUsername" onClick={this.state.switchUser}> {username} </span>
+            <div id="eMenu" className="eMenuItems">
+              <span> Change account details </span>
+              <span> View Transaction History </span>
+              <span> Make Transaction </span>
+              <span> Viewing all Business Acccounts </span>
+            </div>
+          </div>
+          <div id="eWelcomeDiv" className="eWelcomeDiv">
+            <h1> Welcome back {this.state.userDetails.name} </h1>
+          </div>
+          <div id="tableDiv">
+            <Table rows={rowsJSX}/>
           </div>
         </div>
-        <div id="eWelcomeDiv" className="eWelcomeDiv">
-          <h1> Welcome back {this.state.userDetails.name} </h1>
+      );
+    } else {
+      return(
+        <div id="eLoadingContainer" className="ePageContainer">
+				  <span className="eLoadingSpan">Loading...</span>
         </div>
-        <div id="tableDiv">
-          <Table letter={this.state.letter}/>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
-export default CustomerPage;
+EmployeePage.propTypes = {
+  switchUser: PropTypes.func,
+  callback: PropTypes.func
+}
+
+export default EmployeePage;
