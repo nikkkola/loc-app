@@ -8,11 +8,11 @@
 }
 
 .cardContainer a {
-  display: block;
+  visibility: hidden;
 }
 
 .cardContainer:hover a {
-  display: block;
+  visibility: visible;
 }
 
 .cardContainer img {
@@ -23,10 +23,12 @@
   height: 10%;
 }
 
+.cardContainer input {
+  width: 75%;
+}
+
 .cardContainer > ul {
-  list-style-type: none;
   margin: 0;
-  padding: 0;
 }
 
 .cardContainer > h4 {
