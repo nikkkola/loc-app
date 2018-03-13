@@ -25,6 +25,10 @@ class BlockChainDisplay extends React.Component {
       //<div className="container">
         <div className="BlockChainDisplay">
           {blocks}
+          <div className="greyBlock">
+            <div className="greyBlockNumber">9/9</div>
+            <div className="greyBlockLine"/>
+          </div>
         </div>
       //</div>
     )
