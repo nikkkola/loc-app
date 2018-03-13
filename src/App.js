@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import logo from './logo.svg';
 import './App.css';
 import Page from './components/Page/Page.js';
@@ -33,7 +34,7 @@ const sampleLetter = {
 
 class App extends Component {
   render() {
-
+    console.log(this.props);
     let alice = {
       "$class": "org.acme.loc.Customer",
       "companyName": "QuickFix IT",
@@ -43,7 +44,7 @@ class App extends Component {
     };
 
     let aliceHomePageContents = (
-      <UserDetails name={alice.name} companyName={alice.companyName} sortCode = {"98-76-54"} accountNumber = {"12345678"} balance = {"£1049.34"}/>
+      <UserDetails name={this.props.userDetails.name} companyName={this.props.userDetails.businessName} sortCode = {this.props.userDetails.sortCode} accountNumber = {this.props.userDetails.accNo} balance = {this.props.userDetails.balance}/>
     );
 
     let matiasHomePageContents = (
@@ -57,9 +58,14 @@ class App extends Component {
     );
 
     return (
-      <Page contents={matiasHomePageContents}/>
+      <Page contents={aliceHomePageContents}/>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  console.log(state);
+  return { userDetails: state.suggestChangesReducer.bankUser };
+};
+
+export default connect(mapStateToProps)(App);

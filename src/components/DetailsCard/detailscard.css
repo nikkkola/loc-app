@@ -4,6 +4,23 @@
   border-radius: 1px;
   padding: 20px;
   text-align: left;
+  position: relative;
+}
+
+.cardContainer a {
+  display: block;
+}
+
+.cardContainer:hover a {
+  display: block;
+}
+
+.cardContainer img {
+  position: absolute;
+  top: 5%;
+  right: 1%;
+  display: inline-block;
+  height: 10%;
 }
 
 .cardContainer > ul {

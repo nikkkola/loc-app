@@ -1,11 +1,8 @@
-export const ADD_TODO = 'ADD_TODO';
+export const SUGGEST_CHANGES = 'SUGGEST_CHANGES';
 
-let nextTodoId = 0;
-
-export function addTodo(text) {
+export function suggestChanges(newData) {
    return {
-      type: ADD_TODO,
-      id: nextTodoId++,
-      text
+      type: SUGGEST_CHANGES,
+      payload: newData
    };
 }

@@ -1,32 +1,51 @@
 import {combineReducers} from 'redux'
 import * as actions from '../actions/actions'
 
-function todo(state, action) {
-   switch (action.type) {
-      case ADD_TODO:
-         return {
-            id: action.id,
-            text: action.text,
-         }
-      default:
-         return state
-   }
+const initialState = {
+  bankUser: {
+    name: "Miss A R Hamilton",
+    businessName: "Quick Fix IT",
+    sortCode: "12-34-57",
+    accNo: "98765432",
+    bankName: "Bank of Argentina",
+    balance: "£15,670"
+  },
+  bankEmployee: {
+    name: "Matias",
+    bankName: "Bank of Argentina"
+  },
+  loc: {
+    letterId: "",
+    dateAndTime: "",
+    supplier: {
+      name: "",
+      businessName: "",
+      sortCode: "",
+      accNo: "",
+      bankName: "",
+    },
+    productDetails: {
+      type: "",
+      quantity: 0,
+      pricePerUnit: "",
+      total: ""
+    },
+    rules: [],
+    status: ""
+  }
 }
 
-function todos(state = [], action) {
-   switch (action.type) {
-      case ADD_TODO:
-         return [
-            ...state,
-            todo(undefined, action)
-         ]
-      default:
-         return state
-   }
-}
+const suggestChangesReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actions.SUGGEST_CHANGES:
+      return { ...state, loc: [...state.loc, action.payload] };
+    default:
+      return state;
+  }
+};
 
 const rootReducer = combineReducers({
-   todos
+   suggestChangesReducer
 })
 
 export default rootReducer;

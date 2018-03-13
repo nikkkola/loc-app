@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import editIcon from './editIcon.svg';
 import './detailscard.css';
 
 class DetailsCard extends Component {
@@ -43,6 +44,7 @@ class DetailsCard extends Component {
 
     return (
       <div class="cardContainer">
+        <a href="#"><img src={editIcon}/></a>
         <h4>{mainHeadingTxt}</h4>
         {jsx}
       </div>
