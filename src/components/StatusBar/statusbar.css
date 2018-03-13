@@ -1,0 +1,13 @@
+.Node {
+  width: 10%;
+  height: 100%;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.Line {
+  width: 20%;
+  height: 1%
+  
+}
