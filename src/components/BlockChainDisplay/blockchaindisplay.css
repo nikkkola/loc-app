@@ -1,0 +1,9 @@
+.container {
+  overflow: auto;
+}
+
+.BlockChainDisplay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
