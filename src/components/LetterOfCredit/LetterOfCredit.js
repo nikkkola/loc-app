@@ -14,15 +14,64 @@ class LetterOfCredit extends Component {
   }
 
   createLOC() {
-    axios.post('http://localhost:3000/api/InitialTransaction', {
-      
-    })
-    .then(response =>  {
-      console.log(response);
+    axios.post('http://localhost:3000/api/InitialApplication', {
+      "$class": "org.acme.loc.InitialApplication",
+      "letterId": "L123456789",
+      "applicant": "resource:org.acme.loc.Customer#alice",
+      "beneficiary": "resource:org.acme.loc.Customer#bob",
+      "rules": [],
+      "productDetails": {
+        "$class": "org.acme.loc.ProductDetails",
+        "productType": "string",
+        "quantity": 0,
+        "pricePerUnit": 0,
+        "id": "string"
+      },
+      "transactionId": "",
+      "timestamp": "2018-03-13T11:35:00.218Z"
     })
     .catch(error => {
-
+      console.log(error);
     });
+  }
+
+  approveLOC() {
+    axios.post('http://localhost:3000/api/ApproveApplication', {
+      "$class": "org.acme.loc.ApproveApplication",
+      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "approvingParty": "Bob",
+      "transactionId": "",
+      "timestamp": "2018-03-13T11:25:08.043Z"
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  rejectLOC() {
+    axios.post('http://localhost:3000/api/RejectApplication', {
+      "$class": "org.acme.loc.RejectApplication",
+      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "closeReason": "Just not that into you...",
+      "transactionId": "",
+      "timestamp": "2018-03-13T11:35:00.281Z"
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  closeLOC() {
+    axios.post('http://localhost:3000/api/Close', {
+      "$class": "org.acme.loc.Close",
+      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "closeReason": "He's dead Jim",
+      "transactionId": "",
+      "timestamp": "2018-03-13T11:35:00.139Z"
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
 
@@ -88,8 +137,8 @@ class LetterOfCredit extends Component {
 
 
         <div class="actions">
-          <button onClick={this.createLOC}>I accept the application</button>
-          <button onClick={this.props.callback}>I reject the application</button>
+          <button onClick={this.approveLOC}>I accept the application</button>
+          <button onClick={this.rejectLOC}>I reject the application</button>
         </div>
       </div>
     );
