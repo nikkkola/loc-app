@@ -31,7 +31,7 @@ td {
 	color: #4d48da;
 }
 
-button {
+.viewMoreButton {
 	height: 3vh;
 	border: 1px solid #3b34c4;
 	border-radius: 20px;

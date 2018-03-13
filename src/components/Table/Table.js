@@ -6,7 +6,23 @@ import './table.css';
 class Table extends Component {
   constructor(props) {
 		super(props);
+		this.state = {
+			letter: {}
+		}
   }
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			letter: nextProps.letter
+		})
+	}
+
+	generateRows() {
+		let lettersArray = this.props.letters;
+		lettersArray.map((letter) => {
+			// TODO - return a row for each letter in the array
+		});
+	}
 
 	render() {
 		return(
@@ -18,86 +34,86 @@ class Table extends Component {
 				<table>
 					<tbody>
 						<tr className="tableHeaders">
-							<th>Ref Number</th>
-							<th>Submitter Account</th>
-							<th>Business Name</th>
-							<th>Date and Time</th>
-							<th>Status</th>
+							<th>Ref number</th>
+							<th>Submitter Account</th>							
+							<th>Business Name</th>		
+							<th>Date and Time</th>			
+							<th>Status</th>			
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 						<tr>
-							<td className="blueText">R123456789</td>
+							<td className="blueText">{this.state.letter.letterId}</td>
 							<td>Alice Hamilton</td>
 							<td>QuickFix IT</td>
 							<td>Yesterday</td>
-							<td>Awaiting approval</td>
+							<td>{this.state.letter.status}</td>
 						</tr>
 					</tbody>
 				</table>
-				<button>View more</button>
+				<button className="viewMoreButton">View more</button>
 			</div>
-		);
+			);
 	}
 
 }
 
 Table.propTypes = {
-	letters: PropTypes.arrayOf(PropTypes.object)
+	letter: PropTypes.object
 }
 
 export default Table;

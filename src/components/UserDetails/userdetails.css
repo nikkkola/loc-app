@@ -1,11 +1,11 @@
 .UserDetails {
-  background-color: #f2f2f2;
   text-align: left;
-  width: 35%;
   padding-left: 40px;
   padding-top: 40px;
   padding-bottom: 50px;
-  margin-left: 5%;
+  color: white;
+  font-weight: lighter;
+  margin-left: 3%;
 }
 
 p {
