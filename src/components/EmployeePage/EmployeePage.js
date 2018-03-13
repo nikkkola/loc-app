@@ -17,23 +17,23 @@ class CustomerPage extends Component {
 
 	componentDidMount() {
 		axios.get('http://localhost:3000/api/BankEmployee/matias')
-			.then(response => {
-				this.setState ({
-					userDetails: response.data
-        }
-      );
+		.then(response => {
+			this.setState ({
+				userDetails: response.data
+      });
+    })
+    .catch(error => {
+          
     });
     axios.get('http://localhost:3000/api/LetterOfCredit')
-      .then(response => {
-        this.setState ({
-          letter: response.data[0]
-        });
-      }
-    );
-	}
-
-	componentDidUpdate() {
-		console.log(this.state);
+    .then(response => {
+      this.setState ({
+        letter: response.data[0]
+      });
+    })
+    .catch(error => {
+        
+    });
 	}
 
   render() {

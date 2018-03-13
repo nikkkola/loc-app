@@ -12,7 +12,6 @@ class Table extends Component {
   }
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
 		this.setState({
 			letter: nextProps.letter
 		})

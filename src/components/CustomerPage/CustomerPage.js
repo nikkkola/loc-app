@@ -13,7 +13,8 @@ class CustomerPage extends Component {
 		super(props)
 		this.state = {
 			userDetails: {},
-			letter: {}
+			letter: {},
+			callback: this.props.callback
 		}
 	}
 
@@ -37,7 +38,7 @@ class CustomerPage extends Component {
 	generateCards() {
     //TODO - update so this takes an array rather than just an object
     return (
-      <LoCCard letter={this.state.letter}/>
+      <LoCCard letter={this.state.letter} callback={this.state.callback}/>
     );
   }
 
@@ -67,12 +68,16 @@ class CustomerPage extends Component {
     	    </div>
     	  </div>
     	  <div id="locDiv" className="flexDiv">
-    	    <LoCApplyCard />
+    	    <LoCApplyCard callback={this.state.callback}/>
     	    {cardsJSX}
     	  </div>
 			</div>
 		);
   }
+}
+
+CustomerPage.propTypes = {
+	callback: PropTypes.func
 }
 
 export default CustomerPage;

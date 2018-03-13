@@ -2,8 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
+import axios from 'axios';
 
 class LetterOfCredit extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillReceiveProps() {
+
+  }
+
+  createLOC() {
+    axios.post('http://localhost:3000/api/InitialTransaction', {
+      
+    })
+    .then(response =>  {
+      console.log(response);
+    })
+    .catch(error => {
+
+    });
+  }
+
+
   render() {
     let applicantNameText = 'Name: ' + this.props.applicant.name;
     let applicantCompanyNameText = 'Company Name: ' + this.props.applicant.companyName;
@@ -66,8 +88,8 @@ class LetterOfCredit extends Component {
 
 
         <div class="actions">
-          <button>I accept the application</button>
-          <button>I reject the application</button>
+          <button onClick={this.createLOC}>I accept the application</button>
+          <button onClick={this.props.callback}>I reject the application</button>
         </div>
       </div>
     );
