@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
+import BlockChainDisplay from '../BlockChainDisplay/BlockChainDisplay.js';
 import axios from 'axios';
 import { connect } from "react-redux";
 
@@ -78,7 +79,7 @@ class LetterOfCredit extends Component {
   render() {
     console.log(this.props.user);
 
-
+    let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
     let buttonsJSX = (<div/>);
     if(!this.props.isApply) {
       buttonsJSX = (
@@ -95,7 +96,7 @@ class LetterOfCredit extends Component {
       );
     }
 
-    
+
     return (
       <div class="LCcontainer">
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
@@ -111,13 +112,16 @@ class LetterOfCredit extends Component {
         </div>
 
         <br/>
-        
+
         <div class="rules">
             <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
 
         <div class="actions">
           {buttonsJSX}
+        </div>
+        <div class="blockChainContainer">
+          <BlockChainDisplay transactions = {transactions}/>
         </div>
       </div>
     );
