@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import editIcon from './editIcon.svg';
+import editIcon from '../../resources/editIcon.svg';
 import './detailscard.css';
 import { connect } from "react-redux";
 import { getProductDeatils } from "../../actions/actions";
@@ -24,7 +24,7 @@ class DetailsCard extends Component {
   handleChange(index, event) {
     const data = this.state.data;
     data[index] = event.target.value;
-    
+
     this.setState({
       data: data
     });
