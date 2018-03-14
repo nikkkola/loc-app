@@ -83,7 +83,7 @@ class LetterOfCredit extends Component {
     if(!this.props.isApply) {
       buttonsJSX = (
         <div>
-          <button onClick={this.approveLOC(this.props.user)}>I accept the application</button>
+          <button onClick={() => {this.approveLOC(this.props.user)}}>I accept the application</button>
           <button onClick={this.rejectLOC}>I reject the application</button>
         </div>
       );
