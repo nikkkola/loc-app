@@ -5,6 +5,8 @@ import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
 import CustomerPage from './components/CustomerPage/CustomerPage.js';
 import EmployeePage from './components/EmployeePage/EmployeePage.js';
+import BlockChainDisplay from './components/BlockChainDisplay/BlockChainDisplay.js';
+import Alert from './components/Alert/Alert.js';
 
 const sampleLetter = {
   letterId: '123456',
@@ -75,7 +77,7 @@ class App extends Component {
       );
     }
 
-    
+
   }
 }
 
