@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
+import BlockChainDisplay from '../BlockChainDisplay/BlockChainDisplay.js';
 import axios from 'axios';
 import { connect } from "react-redux";
 
@@ -87,6 +88,7 @@ class LetterOfCredit extends Component {
 
 
   render() {
+    let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
     return (
       <div class="LCcontainer">
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
@@ -113,6 +115,9 @@ class LetterOfCredit extends Component {
           <button onClick={this.rejectLOC}>I reject the application</button>*/}
           {console.log(this.props.productDetails)}
           <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
+        </div>
+        <div class="blockChainContainer">
+          <BlockChainDisplay transactions = {transactions}/>
         </div>
       </div>
     );
