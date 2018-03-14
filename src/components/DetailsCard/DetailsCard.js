@@ -2,13 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import editIcon from './editIcon.svg';
 import './detailscard.css';
+import { connect } from "react-redux";
+import { getProductDeatils } from "../../actions/actions";
 
 class DetailsCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: this.props.data,
-      editable: false
+      editable: false,
+      loc: {
+        productDetails: {
+          type: "",
+          quantity: 0,
+          pricePerUnit: "",
+          total: ""
+        },
+        rules: []
+      }
     }
   }
 
@@ -25,6 +36,16 @@ class DetailsCard extends Component {
     this.setState({
       data: data
     })
+    if(this.props.type === "Product") {
+      this.props.getProductDeatils({
+        productDetails: {
+          type: this.state.data[1],
+          quantity: this.state.data[2],
+          pricePerUnit: this.state.data[3],
+          total: this.state.data[4]
+        }
+      });
+    }
   }
 
   render() {
@@ -100,4 +121,10 @@ DetailsCard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-export default DetailsCard;
+const mapDispatchToProps = dispatch => {
+  return {
+    getProductDeatils: productDetails => dispatch(getProductDeatils(productDetails))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(DetailsCard);
