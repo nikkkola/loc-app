@@ -42,7 +42,7 @@ class CustomerPage extends Component {
 	
 	generateCard(i) {
 		return (
-      <LoCCard letter={this.state.letters[i]} callback={this.state.callback}/>
+      <LoCCard letter={this.state.letters[i]} callback={this.state.callback} pageType={"view"}/>
     );
   }
 
@@ -79,7 +79,7 @@ class CustomerPage extends Component {
 						</div>
 					</div>
     		  <div id="locDiv" className="flexDiv">
-    		    <LoCApplyCard callback={this.state.callback}/>
+    		    <LoCApplyCard callback={this.state.callback} />
 						{cardsJSX}
     		  </div>
 				</div>

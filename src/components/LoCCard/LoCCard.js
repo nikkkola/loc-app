@@ -17,7 +17,7 @@ class LoCCard extends Component {
         <h3>{referenceNumberText}</h3>
         <p>{participantsText}</p>
         <p>{productsText}</p>
-        <button className="viewButton" onClick={() => this.props.callback(this.props.letter)}>View Letter Of Credit</button>
+        <button className="viewButton" onClick={() => this.props.callback(this.props.letter, false)}>View Letter Of Credit</button>
       </div>
     );
   }

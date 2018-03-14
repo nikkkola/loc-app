@@ -14,9 +14,6 @@ const productDetails = {
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      productDetails: {}
-    }
   }
 
   createLOC(type, quantity, price, rules) {
@@ -44,11 +41,11 @@ class LetterOfCredit extends Component {
     });
   }
 
-  approveLOC() {
+  approveLOC(approvingParty) {
     axios.post('http://localhost:3000/api/ApproveApplication', {
       "$class": "org.acme.loc.ApproveApplication",
       "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
-      "approvingParty": "Bob",
+      "approvingParty": approvingParty,
       "transactionId": "",
       "timestamp": "2018-03-13T11:25:08.043Z"
     })
@@ -83,8 +80,27 @@ class LetterOfCredit extends Component {
     })
   }
 
-
   render() {
+    console.log(this.props.user);
+
+
+    let buttonsJSX = (<div/>);
+    if(!this.props.isApply) {
+      buttonsJSX = (
+        <div>
+          <button onClick={this.approveLOC(this.props.user)}>I accept the application</button>
+          <button onClick={this.rejectLOC}>I reject the application</button>
+        </div>
+      );
+    } else {
+      buttonsJSX = (
+        <div>
+          <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
+        </div>
+      );
+    }
+
+    
     return (
       <div class="LCcontainer">
         <div class="letterDetails">
@@ -99,17 +115,13 @@ class LetterOfCredit extends Component {
         </div>
 
         <br/>
-
+        
         <div class="rules">
             <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
 
-
         <div class="actions">
-          {/*<button onClick={this.approveLOC}>I accept the application</button>
-          <button onClick={this.rejectLOC}>I reject the application</button>*/}
-          {console.log(this.props.productDetails)}
-          <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
+          {buttonsJSX}
         </div>
       </div>
     );
@@ -117,7 +129,6 @@ class LetterOfCredit extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { productDetails: state.getLetterInputReducer.productDetails, rules: state.getLetterInputReducer.rules };
 };
 

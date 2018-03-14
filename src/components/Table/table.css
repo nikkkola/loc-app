@@ -23,8 +23,17 @@ th {
 	height: 5vh;
 }
 
+.row {
+
+}
+
+.row:hover {
+	cursor: pointer;
+}
+
 td {
 	height: 5vh;
+
 }
 
 .blueText {

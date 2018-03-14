@@ -44,35 +44,39 @@ class App extends Component {
     super();
     this.state = {
       currentPage: pageContents.ALICE,
-      currentLetter: {}
+      currentLetter: {},
+      currentUser: "Alice"
     };
     this.goToAliceScreen = this.goToAliceScreen.bind(this);
     this.goToMatiasScreen = this.goToMatiasScreen.bind(this);
     this.goToLetterScreen = this.goToLetterScreen.bind(this);
   }
 
-  goToLetterScreen(letter) {
+  goToLetterScreen(letter, isApply) {
     this.setState({
       currentPage: pageContents.LOC,
-      currentLetter: letter
+      currentLetter: letter,
+      isApply: isApply
     });
   }
 
   goToAliceScreen() {
     this.setState({
-      currentPage: pageContents.ALICE
+      currentPage: pageContents.ALICE,
+      currentUser: "Alice"
     })
   }
 
   goToMatiasScreen() {
     this.setState({
-      currentPage: pageContents.MATIAS
+      currentPage: pageContents.MATIAS,
+      currentUser: "Matías"
     });
   }
 
   render() {
     let locPageContents = (
-      <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen}/>
+      <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen} isApply={this.state.isApply} user={this.state.currentUser}/>
     );
 
     if(this.state.currentPage == pageContents.ALICE) {
