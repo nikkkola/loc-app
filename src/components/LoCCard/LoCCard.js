@@ -9,8 +9,9 @@ class LoCCard extends Component {
   
   render() {
     let referenceNumberText = 'Ref: ' + this.props.letter.letterId;
-    let participantsText = 'Participants: ' + this.props.letter.applicant + ', ' + this.props.letter.issuingBank + ', ' + this.props.letter.beneficiary + ', ' + this.props.letter.confirmingBank;
-    let productsText = 'Product Type: ';
+    let participantsText = 'Participants: ' + 'Alice' + ', ' + this.props.letter.issuingBank + ', ' + 'Bob' + ', ' + this.props.letter.confirmingBank;
+    let productsText = 'Product Type: ' + this.props.letter.productDetails.productType;
+    console.log(this.props.letter)
     return (
       <div className="LoCCard">
         <h3>{referenceNumberText}</h3>

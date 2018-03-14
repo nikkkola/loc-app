@@ -19,13 +19,13 @@ class LetterOfCredit extends Component {
     }
   }
 
-  createLOC(type, quantity, price) {
+  createLOC(type, quantity, price, rules) {
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
-      "letterId": "L123456789",
+      "letterId": "L2",
       "applicant": "resource:org.acme.loc.Customer#alice",
       "beneficiary": "resource:org.acme.loc.Customer#bob",
-      "rules": [],
+      "rules": rules,
       "productDetails": {
         "$class": "org.acme.loc.ProductDetails",
         "productType": type,
@@ -85,7 +85,6 @@ class LetterOfCredit extends Component {
 
 
   render() {
-    console.log("LOC props: ", this.props);
     return (
       <div class="LCcontainer">
         <div class="letterDetails">
@@ -102,14 +101,15 @@ class LetterOfCredit extends Component {
         <br/>
 
         <div class="rules">
-            <DetailsCard type="Rules" data={this.props.rules}/>
+            <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
 
 
         <div class="actions">
           {/*<button onClick={this.approveLOC}>I accept the application</button>
           <button onClick={this.rejectLOC}>I reject the application</button>*/}
-          <button onClick={() => this.createLOC(productDetails.productType, productDetails.quantity, productDetails.pricePerUnit)}>Start approval process</button>
+          {console.log(this.props.productDetails)}
+          <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
         </div>
       </div>
     );
@@ -118,7 +118,7 @@ class LetterOfCredit extends Component {
 
 const mapStateToProps = state => {
   console.log(state);
-  return { productDetails: state.getLetterInputReducer.productDetails };
+  return { productDetails: state.getLetterInputReducer.productDetails, rules: state.getLetterInputReducer.rules };
 };
 
 export default connect(mapStateToProps)(LetterOfCredit);

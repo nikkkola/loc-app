@@ -4,22 +4,14 @@ import editIcon from './editIcon.svg';
 import './detailscard.css';
 import { connect } from "react-redux";
 import { getProductDeatils } from "../../actions/actions";
+import { getRules } from "../../actions/actions";
 
 class DetailsCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: this.props.data,
-      editable: false,
-      loc: {
-        productDetails: {
-          type: "",
-          quantity: 0,
-          pricePerUnit: "",
-          total: ""
-        },
-        rules: []
-      }
+      editable: false
     }
   }
 
@@ -38,13 +30,17 @@ class DetailsCard extends Component {
     })
     if(this.props.type === "Product") {
       this.props.getProductDeatils({
-        productDetails: {
+        
           type: this.state.data[1],
-          quantity: this.state.data[2],
-          pricePerUnit: this.state.data[3],
+          quantity: parseInt(this.state.data[2]),
+          pricePerUnit: parseInt(this.state.data[3]),
           total: this.state.data[4]
-        }
+        
       });
+    } else if (this.props.type === "Rules") {
+      this.props.getRules({
+        rules: this.state.data
+      })
     }
   }
 
@@ -123,7 +119,8 @@ DetailsCard.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProductDeatils: productDetails => dispatch(getProductDeatils(productDetails))
+    getProductDeatils: productDetails => dispatch(getProductDeatils(productDetails)),
+    getRules: rules => dispatch(getRules(rules))
   };
 };
 

@@ -71,10 +71,8 @@ class App extends Component {
   }
 
   render() {
-    console.log("current letter: ",this.state.currentLetter);
-
     let locPageContents = (
-      <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules} callback={this.goToAliceScreen}/>
+      <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen}/>
     );
 
     if(this.state.currentPage == pageContents.ALICE) {
