@@ -9,7 +9,8 @@ class Block extends React.Component {
     this.state = {
       transactionDetails: this.props.transactionDetails,
       date: this.props.date,
-      time: this.props.time
+      time: this.props.time,
+      number: this.props.number
     }
   }
 
@@ -17,6 +18,7 @@ class Block extends React.Component {
   {
     return (
       <div className="Block">
+        <div className="BlockNumber">{this.state.number}</div>
         <div className="BlockLine"></div>
         <div className="BlockText">
           <p>{this.state.transactionDetails}</p>
