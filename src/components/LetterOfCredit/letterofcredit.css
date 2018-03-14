@@ -68,6 +68,10 @@
   height: 20px;
 }
 
+.backButton:hover {
+  cursor: pointer;
+}
+
 .blockChainContainer {
   margin-left: 56%;
 }
