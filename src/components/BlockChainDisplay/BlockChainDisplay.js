@@ -35,4 +35,8 @@ class BlockChainDisplay extends React.Component {
   }
 }
 
+BlockChainDisplay.propTypes = {
+  transactions: PropTypes.array.isRequired
+};
+
 export default BlockChainDisplay;

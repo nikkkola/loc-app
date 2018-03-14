@@ -23,4 +23,9 @@ class Alert extends React.Component {
   }
 }
 
+Alert.propTypes = {
+  alertType: PropTypes.array.isRequired,
+  alertMessage: PropTypes.array.isRequired
+};
+
 export default Alert;

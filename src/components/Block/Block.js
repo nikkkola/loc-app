@@ -30,4 +30,10 @@ class Block extends React.Component {
   }
 }
 
+Block.propTypes = {
+  date: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired
+};
+
 export default Block;
