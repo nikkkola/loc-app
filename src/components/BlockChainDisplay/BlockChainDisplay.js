@@ -1,6 +1,4 @@
-
 import React from 'react';
-import PropTypes from 'prop-types';
 import './blockchaindisplay.css';
 import Block from '../../components/Block/Block.js';
 
@@ -9,8 +7,7 @@ class BlockChainDisplay extends React.Component {
     super(props);
     this.state = {
       transactions: this.props.transactions
-    //this.props.transactions
-    }
+    };
   }
 
   render() {
@@ -22,7 +19,6 @@ class BlockChainDisplay extends React.Component {
       blocks.push(<Block transactionDetails = {transaction[0]} date = {transaction[1]} time = {transaction[2]} number = {blockNumber}/>);
     }
     return (
-      //<div className="container">
         <div className="BlockChainDisplay">
           {blocks}
           <div className="greyBlock">
@@ -30,7 +26,6 @@ class BlockChainDisplay extends React.Component {
             <div className="greyBlockLine"/>
           </div>
         </div>
-      //</div>
     )
   }
 }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import logo from './logo.svg';
 import './App.css';
 import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
@@ -79,27 +77,23 @@ class App extends Component {
       <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen} isApply={this.state.isApply} user={this.state.currentUser}/>
     );
 
-    if(this.state.currentPage == pageContents.ALICE) {
-      return (
+    let pageToShow;
+
+    if(this.state.currentPage === pageContents.ALICE) {
+      pageToShow = (
         <CustomerPage switchUser={this.goToMatiasScreen} callback={this.goToLetterScreen}/>
       );
-    } else if(this.state.currentPage == pageContents.MATIAS) {
-      return (
+    } else if(this.state.currentPage === pageContents.MATIAS) {
+      pageToShow = (
         <EmployeePage switchUser={this.goToAliceScreen} callback={this.goToLetterScreen}/>
       );
     } else {
-      return(
+      pageToShow = (
         <Page contents={locPageContents} />
       );
     }
+    return pageToShow;
   }
 }
 
-// const mapStateToProps = state => {
-//   console.log(state);
-//   return { userDetails: state.suggestChangesReducer.bankUser };
-// };
-//
-// export default connect(mapStateToProps)(App);
-//
 export default App;
