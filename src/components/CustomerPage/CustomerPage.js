@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './customerpage.css';
 import axios from 'axios';
-import Page from '../Page/Page.js'
 import UserDetails from '../UserDetails/UserDetails.js';
-import Alert from '../Alert/Alert.js'
+import Alert from '../Alert/Alert.js';
 import LoCCard from '../LoCCard/LoCCard.js';
 import LoCApplyCard from '../LoCCard/LoCApplyCard.js';
 
@@ -39,7 +37,7 @@ class CustomerPage extends Component {
 			console.log(error);
 		});
 	}
-	
+
 	generateCard(i) {
 		return (
       <LoCCard letter={this.state.letters[i]} callback={this.state.callback}/>
@@ -49,7 +47,7 @@ class CustomerPage extends Component {
   render() {
 		if(this.state.userDetails.name) {
 			let username = this.state.userDetails.name + ", Customer of " + this.state.userDetails.bankName;
-   
+
     	let cardsJSX = [];
     	if(this.state.letters.length) {
 				for(let i = 0; i < this.state.letters.length; i++) {
@@ -92,11 +90,6 @@ class CustomerPage extends Component {
 			);
 		}
 	}
-}
-
-CustomerPage.propTypes = {
-	switchUser: PropTypes.func,
-	callback: PropTypes.func
 }
 
 export default CustomerPage;

@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
 import { connect } from "react-redux";
 
-const productDetails = {
-  productType: "Computers",
-  quantity: 100,
-  pricePerUnit: 100
-}
-
 class LetterOfCredit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productDetails: {}
-    }
-  }
-
   createLOC(type, quantity, price, rules) {
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
@@ -83,7 +69,6 @@ class LetterOfCredit extends Component {
     })
   }
 
-
   render() {
     return (
       <div class="LCcontainer">
@@ -106,9 +91,8 @@ class LetterOfCredit extends Component {
 
 
         <div class="actions">
-          {/*<button onClick={this.approveLOC}>I accept the application</button>
-          <button onClick={this.rejectLOC}>I reject the application</button>*/}
-          {console.log(this.props.productDetails)}
+          {/* <button onClick={this.approveLOC}>I accept the application</button>
+          <button onClick={this.rejectLOC}>I reject the application</button> */}
           <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
         </div>
       </div>
@@ -117,10 +101,7 @@ class LetterOfCredit extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { productDetails: state.getLetterInputReducer.productDetails, rules: state.getLetterInputReducer.rules };
 };
 
 export default connect(mapStateToProps)(LetterOfCredit);
-
-// export default LetterOfCredit;

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './employeepage.css';
 import axios from 'axios';
-import Page from '../Page/Page.js'
 import Table from '../Table/Table.js';
 
 
@@ -53,14 +51,14 @@ class EmployeePage extends Component {
   render() {
     if(this.state.userDetails.name) {
       let username = this.state.userDetails.name + ", Employee at  " + this.state.userDetails.bankName;
-      
+
       let rowsJSX = [];
       if(this.state.letters.length) {
         for(let i = 0; i < this.state.letters.length; i++) {
           rowsJSX.push(this.generateRow(i))
         }
       }
-      
+
       return (
         <div id="employeePageContainer" className="ePageContainer">
           <div id="eHeaderDiv" className="flexDiv eHeaderDiv">
@@ -88,11 +86,6 @@ class EmployeePage extends Component {
       );
     }
   }
-}
-
-EmployeePage.propTypes = {
-  switchUser: PropTypes.func,
-  callback: PropTypes.func
 }
 
 export default EmployeePage;

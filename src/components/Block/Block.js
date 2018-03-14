@@ -1,6 +1,4 @@
-
 import React from 'react';
-import PropTypes from 'prop-types';
 import './block.css';
 
 class Block extends React.Component {
@@ -11,7 +9,7 @@ class Block extends React.Component {
       date: this.props.date,
       time: this.props.time,
       number: this.props.number
-    }
+    };
   }
 
   render()
