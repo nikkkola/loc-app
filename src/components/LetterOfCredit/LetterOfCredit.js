@@ -39,7 +39,7 @@ class LetterOfCredit extends Component {
       this.setState({
         disableButtons: false
       })
-      this.props.callback();
+      this.props.callback(this.props.user);
     })
     .catch(error => {
       console.log(error);
@@ -111,24 +111,32 @@ class LetterOfCredit extends Component {
   }
 
   generateLetterId() {
-    let id = "L" + Math.floor((Math.random() * 9999) + 1000);
+    let id = "L" + Math.floor((Math.random() * 8999) + 1000);
     console.log(id);
     return id;
   }
 
   render() {
+    console.log(this.props.letter.productDetails);
+    console.log(this.props.productDetails);
     let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
-    let buttonsJSX = (<div/>);
+    let productDetails = this.props.productDetails;
+    let buttonsJSX = (<div/>); 
     if(!this.props.isApply) {
+      productDetails = {
+        type: this.props.letter.productDetails.productType,
+        quantity: this.props.letter.productDetails.quantity,
+        pricePerUnit: this.props.letter.productDetails.pricePerUnit
+      }
       buttonsJSX = (
-        <div>
+        <div class="actions">
           <button disabled={this.state.disableButtons} onClick={() => {this.approveLOC(this.props.letter.letterId, this.props.user)}}>I accept the application</button>
           <button disabled={this.state.disableButtons} onClick={this.rejectLOC}>I reject the application</button>
         </div>
       );
     } else {
       buttonsJSX = (
-        <div>
+        <div class="actions">
           <button disabled={this.state.disableButtons} onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
         </div>
       );
@@ -138,22 +146,23 @@ class LetterOfCredit extends Component {
       <div class="LCcontainer">
         {console.log(this.props.user)}
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {this.props.callback(this.props.user)}}/>
-        <div class="letterDetails">
-          <h2>{this.props.letter.letterId}</h2>
-          <p>{this.props.date}</p>
+        <div class="letterHeader">
+          <div class="letterDetails">
+            <h2>{this.props.letter.letterId}</h2>
+            <p>{this.props.date}</p>
+          </div>
+          { this.state.disableButtons && <div class="statusMessage"> Please wait... </div> }
         </div>
         <div class="letterContent">
           <DetailsCard type="Person" data={["Application Request"].concat(Object.values(this.props.applicant))}/>
           <DetailsCard type="Person" data={["Supplier Request"].concat(Object.values(this.props.beneficiary))}/>
-          <DetailsCard type="Product" data={["Product Details"].concat(Object.values(this.props.productDetails))}/>
+          <DetailsCard type="Product" data={["Product Details"].concat(Object.values(productDetails))}/>
         </div>
         <br/>
         <div class="rules">
             <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
-        <div class="actions">
-          {buttonsJSX}
-        </div>
+        {buttonsJSX}
         <div class="blockChainContainer">
           <BlockChainDisplay transactions = {transactions}/>
         </div>

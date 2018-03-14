@@ -8,12 +8,21 @@
   clear: left;
 }
 
+.letterHeader {
+  display: flex;
+  flex-direction: row;
+}
+
 .letterDetails {
   padding: 2% 0 0 2%;
 }
 
 .letterDetails > h2 {
   margin: 0;
+}
+
+.statusMessage {
+  margin-left: 82%;
 }
 
 .cardsContainer {
@@ -48,7 +57,7 @@
   padding-left: 2%;
 }
 
-.actions button {
+.actions > button {
   border-radius: 30px;
   border: 1px solid #5f7bfd;
   background-color: transparent;
