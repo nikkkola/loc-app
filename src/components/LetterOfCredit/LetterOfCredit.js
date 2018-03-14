@@ -36,13 +36,17 @@ class LetterOfCredit extends Component {
     });
   }
 
-  approveLOC(approvingParty) {
+  approveLOC(letterId, approvingParty) {
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/ApproveApplication', {
       "$class": "org.acme.loc.ApproveApplication",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "loc": letter,
       "approvingParty": approvingParty,
       "transactionId": "",
       "timestamp": "2018-03-13T11:25:08.043Z"
+    })
+    .then(response => {
+      console.log(response);
     })
     .catch(error => {
       console.log(error);
@@ -52,7 +56,7 @@ class LetterOfCredit extends Component {
   rejectLOC() {
     axios.post('http://localhost:3000/api/RejectApplication', {
       "$class": "org.acme.loc.RejectApplication",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "loc": "resource:org.acme.loc.LetterOfCredit#",
       "closeReason": "Just not that into you...",
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.281Z"
@@ -83,7 +87,7 @@ class LetterOfCredit extends Component {
     if(!this.props.isApply) {
       buttonsJSX = (
         <div>
-          <button onClick={() => {this.approveLOC(this.props.user)}}>I accept the application</button>
+          <button onClick={() => {this.approveLOC(this.props.letter.letterId, this.props.user)}}>I accept the application</button>
           <button onClick={this.rejectLOC}>I reject the application</button>
         </div>
       );

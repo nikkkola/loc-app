@@ -17,7 +17,6 @@ class UserDetails extends Component {
     let companyNameText = 'Company Name: '+ this.state.companyName;
     let sortCodeText = 'Sort Code: ' + this.state.sortCode;
     let accountNumberText = 'Account Number: ' + this.state.accountNumber;
-    let balanceText = 'Balance: ' + this.state.balance;
     return (
       <div className="UserDetails">
         <h1>Business Account</h1>
@@ -25,7 +24,6 @@ class UserDetails extends Component {
         <p>{companyNameText}</p>
         <p>{sortCodeText}</p>
         <p>{accountNumberText}</p>
-        <p>{balanceText}</p>
       </div>
     );
   }

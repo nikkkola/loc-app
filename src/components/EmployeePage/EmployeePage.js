@@ -38,7 +38,7 @@ class EmployeePage extends Component {
 
   generateRow(i) {
     return (
-			<tr className="row" onClick={() => this.props.callback(i, false)}>
+			<tr className="row" onClick={() => this.props.callback(this.state.letters[i], false)}>
 				<td className="blueText">{this.state.letters[i].letterId}</td>
 				<td>Alice Hamilton</td>
 				<td>QuickFix IT</td>
