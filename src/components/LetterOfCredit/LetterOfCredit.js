@@ -4,16 +4,18 @@ import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
 
+const productDetails = {
+  productType: "Computers",
+  quantity: 100,
+  pricePerUnit: 100
+}
+
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillReceiveProps() {
-
-  }
-
-  createLOC(producType, quantity, pricePerUnit) {
+  createLOC(type, quantity, price) {
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
       "letterId": "L123456789",
@@ -22,13 +24,16 @@ class LetterOfCredit extends Component {
       "rules": [],
       "productDetails": {
         "$class": "org.acme.loc.ProductDetails",
-        "productType": "string",
-        "quantity": 0,
-        "pricePerUnit": 0,
+        "productType": type,
+        "quantity": quantity,
+        "pricePerUnit": price,
         "id": "string"
       },
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.218Z"
+    })
+    .then(response => {
+      console.log(response);
     })
     .catch(error => {
       console.log(error);
@@ -76,10 +81,11 @@ class LetterOfCredit extends Component {
 
 
   render() {
+    console.log("LOC props: ", this.props);
     return (
       <div class="LCcontainer">
         <div class="letterDetails">
-          <h2>{this.props.letterId}</h2>
+          <h2>{this.props.letter.letterId}</h2>
           <p>{this.props.date}</p>
         </div>
 
@@ -97,8 +103,9 @@ class LetterOfCredit extends Component {
 
 
         <div class="actions">
-          <button onClick={this.approveLOC}>I accept the application</button>
-          <button onClick={this.rejectLOC}>I reject the application</button>
+          {/*<button onClick={this.approveLOC}>I accept the application</button>
+          <button onClick={this.rejectLOC}>I reject the application</button>*/}
+          <button onClick={() => this.createLOC(productDetails.productType, productDetails.quantity, productDetails.pricePerUnit)}>Start approval process</button>
         </div>
       </div>
     );

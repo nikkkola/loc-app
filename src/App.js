@@ -43,13 +43,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentPage: pageContents.ALICE
+      currentPage: pageContents.ALICE,
+      currentLetter: {}
     };
+    this.goToAliceScreen = this.goToAliceScreen.bind(this);
+    this.goToMatiasScreen = this.goToMatiasScreen.bind(this);
+    this.goToLetterScreen = this.goToLetterScreen.bind(this);
   }
 
-  goToLetterScreen() {
+  goToLetterScreen(letter) {
     this.setState({
-      currentPage: pageContents.LOC
+      currentPage: pageContents.LOC,
+      currentLetter: letter
     });
   }
 
@@ -66,17 +71,19 @@ class App extends Component {
   }
 
   render() {
+    console.log("current letter: ",this.state.currentLetter);
+
     let locPageContents = (
-      <LetterOfCredit letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules} callback={this.goToAliceScreen.bind(this)}/>
+      <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} productDetails={sampleLetter.productDetails} rules={sampleLetter.rules} callback={this.goToAliceScreen}/>
     );
 
     if(this.state.currentPage == pageContents.ALICE) {
       return (
-        <CustomerPage switchUser={this.goToMatiasScreen.bind((this))} callback={this.goToLetterScreen.bind((this))}/>
+        <CustomerPage switchUser={this.goToMatiasScreen} callback={this.goToLetterScreen}/>
       );
     } else if(this.state.currentPage == pageContents.MATIAS) {
       return (
-        <EmployeePage switchUser={this.goToAliceScreen.bind((this))} callback={this.goToLetterScreen.bind((this))}/>
+        <EmployeePage switchUser={this.goToAliceScreen} callback={this.goToLetterScreen}/>
       );
     } else {
       return(
