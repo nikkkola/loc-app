@@ -4,6 +4,8 @@ import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
 
+import backButtonIcon from '../../resources/images/left-arrow.svg'
+
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
@@ -78,6 +80,7 @@ class LetterOfCredit extends Component {
   render() {
     return (
       <div class="LCcontainer">
+        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
         <div class="letterDetails">
           <h2>{this.props.letterId}</h2>
           <p>{this.props.date}</p>
