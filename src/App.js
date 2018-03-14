@@ -93,9 +93,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return { userDetails: state.suggestChangesReducer.bankUser };
-};
-
-export default connect(mapStateToProps)(App);
+// const mapStateToProps = state => {
+//   console.log(state);
+//   return { userDetails: state.suggestChangesReducer.bankUser };
+// };
+//
+// export default connect(mapStateToProps)(App);
+//
+export default App;

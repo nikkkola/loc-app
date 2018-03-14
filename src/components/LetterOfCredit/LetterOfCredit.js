@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
+import { connect } from "react-redux";
 
 const productDetails = {
   productType: "Computers",
@@ -13,6 +14,9 @@ const productDetails = {
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      productDetails: {}
+    }
   }
 
   createLOC(type, quantity, price) {
@@ -112,30 +116,11 @@ class LetterOfCredit extends Component {
   }
 }
 
-LetterOfCredit.propTypes = {
-  letterId: PropTypes.string.isRequired,
-  date: PropTypes.instanceOf(Date).isRequired,
-  applicant: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    companyName: PropTypes.string.isRequired,
-    sortCode: PropTypes.string.isRequired,
-    accNo: PropTypes.string.isRequired,
-    bankName: PropTypes.string.isRequired,
-  }).isRequired,
-  beneficiary: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    companyName: PropTypes.string.isRequired,
-    sortCode: PropTypes.string.isRequired,
-    accNo: PropTypes.string.isRequired,
-    bankName: PropTypes.string.isRequired,
-  }).isRequired,
-  productDetails: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    unitPrice: PropTypes.string.isRequired,
-    totalPrice: PropTypes.string.isRequired
-  }).isRequired,
-  rules: PropTypes.arrayOf(PropTypes.string).isRequired
+const mapStateToProps = state => {
+  console.log(state);
+  return { productDetails: state.getLetterInputReducer.productDetails };
 };
 
-export default LetterOfCredit;
+export default connect(mapStateToProps)(LetterOfCredit);
+
+// export default LetterOfCredit;
