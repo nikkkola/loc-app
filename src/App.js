@@ -4,6 +4,7 @@ import Page from './components/Page/Page.js';
 import LetterOfCredit from './components/LetterOfCredit/LetterOfCredit.js';
 import CustomerPage from './components/CustomerPage/CustomerPage.js';
 import EmployeePage from './components/EmployeePage/EmployeePage.js';
+import { HashRouter, Route, Link } from 'react-router-dom'
 
 const sampleLetter = {
   letterId: '123456',
@@ -72,27 +73,49 @@ class App extends Component {
     });
   }
 
+ 
+
+  // render() {
+  //   let locPageContents = (
+  //     <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen} isApply={this.state.isApply} user={this.state.currentUser}/>
+  //   );
+
+  //   let pageToShow;
+
+  //   if(this.state.currentPage === pageContents.ALICE) {
+  //     pageToShow = (
+  //       <CustomerPage switchUser={this.goToMatiasScreen} callback={this.goToLetterScreen}/>
+  //     );
+  //   } else if(this.state.currentPage === pageContents.MATIAS) {
+  //     pageToShow = (
+  //       <EmployeePage switchUser={this.goToAliceScreen} callback={this.goToLetterScreen}/>
+  //     );
+  //   } else {
+  //     pageToShow = (
+  //       <Page contents={locPageContents} />
+  //     );
+  //   }
+  //   return pageToShow;
+  // }
+
   render() {
     let locPageContents = (
       <LetterOfCredit letter={this.state.currentLetter} letterId={sampleLetter.letterId} date={sampleLetter.date} applicant={sampleLetter.applicant} beneficiary={sampleLetter.beneficiary} rules={sampleLetter.rules} callback={this.goToAliceScreen} isApply={this.state.isApply} user={this.state.currentUser}/>
     );
 
-    let pageToShow;
+    let customerPage = () => (<CustomerPage switchUser={this.goToMatiasScreen} callback={this.goToLetterScreen}/>);
+    let employeePage = () => (<EmployeePage switchUser={this.goToAliceScreen} callback={this.goToLetterScreen}/>);
+    let locPage = () => (<Page contents={locPageContents} />);
 
-    if(this.state.currentPage === pageContents.ALICE) {
-      pageToShow = (
-        <CustomerPage switchUser={this.goToMatiasScreen} callback={this.goToLetterScreen}/>
-      );
-    } else if(this.state.currentPage === pageContents.MATIAS) {
-      pageToShow = (
-        <EmployeePage switchUser={this.goToAliceScreen} callback={this.goToLetterScreen}/>
-      );
-    } else {
-      pageToShow = (
-        <Page contents={locPageContents} />
-      );
-    }
-    return pageToShow;
+    return (
+      <HashRouter >
+        <div>
+          <Route path='/customer' component={customerPage} />
+          <Route path='/employee' component={employeePage} />
+          <Route path='/letterOfCredit' component={locPage} />
+        </div>
+      </HashRouter>
+    )
   }
 }
 

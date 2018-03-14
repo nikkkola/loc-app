@@ -6,6 +6,8 @@ import Alert from '../Alert/Alert.js';
 import LoCCard from '../LoCCard/LoCCard.js';
 import LoCApplyCard from '../LoCCard/LoCApplyCard.js';
 
+import { HashRouter, Route, Link } from 'react-router-dom'
+
 class CustomerPage extends Component {
   constructor(props) {
 		super(props)
@@ -58,7 +60,8 @@ class CustomerPage extends Component {
 			return (
     		<div id="customerPageContainer" className="cPageContainer">
     		  <div id="cHeaderDiv" className="flexDiv cHeaderDiv">
-    		    <span className="cUsername" onClick={this.state.switchUser}> {username} </span>
+						<Link to='/employee'>{username}</Link>
+    		    {/* <span className="cUsername" onClick={this.state.switchUser}> {username} </span> */}
     		    <div id="cMenu" className="cMenuItems">
     		      <span> Change account details </span>
     		      <span> View Transaction History </span>

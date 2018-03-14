@@ -3,6 +3,7 @@ import './employeepage.css';
 import axios from 'axios';
 import Table from '../Table/Table.js';
 
+import { HashRouter, Route, Link } from 'react-router-dom'
 
 class EmployeePage extends Component {
   constructor(props) {
@@ -62,7 +63,8 @@ class EmployeePage extends Component {
       return (
         <div id="employeePageContainer" className="ePageContainer">
           <div id="eHeaderDiv" className="flexDiv eHeaderDiv">
-            <span className="eUsername" onClick={this.state.switchUser}> {username} </span>
+            <Link to='/customer'>{username}</Link>
+            {/* <span className="eUsername" onClick={this.state.switchUser}> {username} </span> */}
             <div id="eMenu" className="eMenuItems">
               <span> Change account details </span>
               <span> View Transaction History </span>

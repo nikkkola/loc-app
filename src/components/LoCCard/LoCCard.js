@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './loccard.css';
+import { HashRouter, Route, Link } from 'react-router-dom'
 
 class LoCCard extends Component {
   render() {
@@ -11,7 +12,9 @@ class LoCCard extends Component {
         <h3>{referenceNumberText}</h3>
         <p>{participantsText}</p>
         <p>{productsText}</p>
-        <button className="viewButton" onClick={() => this.props.callback(this.props.letter, false)}>View Letter Of Credit</button>
+        <button className="viewButton" onClick={() => this.props.callback(this.props.letter, false)}>
+          <Link to='letterOfCredit'>View Letter Of Credit</Link>
+        </button>
       </div>
     );
   }
