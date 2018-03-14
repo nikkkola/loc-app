@@ -34,7 +34,7 @@ class DetailsCard extends Component {
         type: this.state.data[1],
         quantity: parseInt(this.state.data[2], 10),
         pricePerUnit: parseInt(this.state.data[3], 10),
-        total: this.state.data[4]
+        total: parseInt(this.state.data[2]*this.state.data[3], 10)
       });
     }
     else if (this.props.type === "Rules") {
@@ -75,7 +75,7 @@ class DetailsCard extends Component {
             <span class="subheadingSpan, topHeading">PRICE PER UNIT</span>
             { (this.state.editable) ? <input class="subheadingSpan" type="text" onChange={this.handleChange.bind(this, 3)} defaultValue={this.state.data[3]} /> : <span class="subheadingSpan">{this.state.data[3]}</span> }
             <span class="subheadingSpan, topHeading">TOTAL</span>
-            { (this.state.editable) ? <input class="subheadingSpan" type="text" onChange={this.handleChange.bind(this, 4)} defaultValue={this.state.data[4]} /> : <span class="subheadingSpan">{this.state.data[4]}</span> }
+            <span class="subheadingSpan">{this.state.data[2]*this.state.data[3]}</span>
           </div>
         );
         break;
