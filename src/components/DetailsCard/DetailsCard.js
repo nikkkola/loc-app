@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import editIcon from './editIcon.svg';
+import editIcon from '../../resources/editIcon.svg';
 import './detailscard.css';
 import { connect } from "react-redux";
 import { getProductDeatils } from "../../actions/actions";
@@ -25,22 +24,23 @@ class DetailsCard extends Component {
   handleChange(index, event) {
     const data = this.state.data;
     data[index] = event.target.value;
+
     this.setState({
       data: data
-    })
+    });
+
     if(this.props.type === "Product") {
       this.props.getProductDeatils({
-        
-          type: this.state.data[1],
-          quantity: parseInt(this.state.data[2]),
-          pricePerUnit: parseInt(this.state.data[3]),
-          total: this.state.data[4]
-        
+        type: this.state.data[1],
+        quantity: parseInt(this.state.data[2], 10),
+        pricePerUnit: parseInt(this.state.data[3], 10),
+        total: this.state.data[4]
       });
-    } else if (this.props.type === "Rules") {
+    }
+    else if (this.props.type === "Rules") {
       this.props.getRules({
         rules: this.state.data
-      })
+      });
     }
   }
 
@@ -111,11 +111,6 @@ class DetailsCard extends Component {
     );
   }
 }
-
-DetailsCard.propTypes = {
-  type: PropTypes.oneOf(['Person', 'Product', 'Rules']).isRequired,
-  data: PropTypes.arrayOf(PropTypes.string).isRequired
-};
 
 const mapDispatchToProps = dispatch => {
   return {

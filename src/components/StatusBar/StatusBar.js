@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import './statusbar.css';
@@ -42,7 +41,6 @@ class StatusBar extends React.Component {
             <div><img src={StatusBarThisStep} alt="image not found"/></div>
           </div>
         ));
-        //generatedJSX.push((<div className="Node"><img src={StatusBarThisStep} alt="image not found"/></div>));
       } else if (stepLabel < currentStep) {
         if(this.state.isHovering){
           generatedJSX.push((
@@ -62,7 +60,6 @@ class StatusBar extends React.Component {
         generatedJSX.push((<div className="Line"/>));
       }
     });
-    console.log(generatedJSX);
     return (
       <div className="Container">
       {generatedJSX.map((jsx) => {
