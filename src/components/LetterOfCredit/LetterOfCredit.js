@@ -4,6 +4,8 @@ import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
 import { connect } from "react-redux";
 
+import backButtonIcon from '../../resources/images/left-arrow.svg'
+
 class LetterOfCredit extends Component {
   createLOC(type, quantity, price, rules) {
     axios.post('http://localhost:3000/api/InitialApplication', {
@@ -72,6 +74,7 @@ class LetterOfCredit extends Component {
   render() {
     return (
       <div class="LCcontainer">
+        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
         <div class="letterDetails">
           <h2>{this.props.letter.letterId}</h2>
           <p>{this.props.date}</p>
