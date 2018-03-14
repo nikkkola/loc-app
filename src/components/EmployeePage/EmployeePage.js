@@ -51,7 +51,7 @@ class EmployeePage extends Component {
   }
 
   render() {
-    if(this.state.letters.length) {
+    if(this.state.userDetails.name) {
       let username = this.state.userDetails.name + ", Employee at  " + this.state.userDetails.bankName;
       
       let rowsJSX = [];
