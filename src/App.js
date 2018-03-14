@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import logo from './logo.svg';
 import './App.css';
 import Page from './components/Page/Page.js';
@@ -13,13 +14,15 @@ const sampleLetter = {
     name: 'Alice',
     companyName: 'QuickFix IT',
     sortCode: '12-34-56',
-    accNo: '98765432'
+    accNo: '98765432',
+    bankName: 'Bank of Argentina'
   },
   beneficiary: {
     name: 'Bob',
     companyName: 'Bob\'s Company',
     sortCode: '12-34-56',
-    accNo: '98765432'
+    accNo: '98765432',
+    bankName: 'Central Bank of Belgium'
   },
   productDetails: {
     type: 'Computers',
@@ -83,4 +86,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  console.log(state);
+  return { userDetails: state.suggestChangesReducer.bankUser };
+};
+
+export default connect(mapStateToProps)(App);
