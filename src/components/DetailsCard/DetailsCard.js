@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import editIcon from './editIcon.svg';
 import './detailscard.css';
+import { connect } from "react-redux";
+import { getProductDeatils } from "../../actions/actions";
+import { getRules } from "../../actions/actions";
 
 class DetailsCard extends Component {
   constructor(props) {
@@ -25,6 +28,20 @@ class DetailsCard extends Component {
     this.setState({
       data: data
     })
+    if(this.props.type === "Product") {
+      this.props.getProductDeatils({
+        
+          type: this.state.data[1],
+          quantity: parseInt(this.state.data[2]),
+          pricePerUnit: parseInt(this.state.data[3]),
+          total: this.state.data[4]
+        
+      });
+    } else if (this.props.type === "Rules") {
+      this.props.getRules({
+        rules: this.state.data
+      })
+    }
   }
 
   render() {
@@ -100,4 +117,11 @@ DetailsCard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-export default DetailsCard;
+const mapDispatchToProps = dispatch => {
+  return {
+    getProductDeatils: productDetails => dispatch(getProductDeatils(productDetails)),
+    getRules: rules => dispatch(getRules(rules))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(DetailsCard);

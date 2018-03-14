@@ -3,34 +3,43 @@ import PropTypes from 'prop-types';
 import './letterofcredit.css';
 import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
+import { connect } from "react-redux";
+
+const productDetails = {
+  productType: "Computers",
+  quantity: 100,
+  pricePerUnit: 100
+}
 
 import backButtonIcon from '../../resources/images/left-arrow.svg'
 
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      productDetails: {}
+    }
   }
 
-  componentWillReceiveProps() {
-
-  }
-
-  createLOC(producType, quantity, pricePerUnit) {
+  createLOC(type, quantity, price, rules) {
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
-      "letterId": "L123456789",
+      "letterId": "L2",
       "applicant": "resource:org.acme.loc.Customer#alice",
       "beneficiary": "resource:org.acme.loc.Customer#bob",
-      "rules": [],
+      "rules": rules,
       "productDetails": {
         "$class": "org.acme.loc.ProductDetails",
-        "productType": "string",
-        "quantity": 0,
-        "pricePerUnit": 0,
+        "productType": type,
+        "quantity": quantity,
+        "pricePerUnit": price,
         "id": "string"
       },
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.218Z"
+    })
+    .then(response => {
+      console.log(response);
     })
     .catch(error => {
       console.log(error);
@@ -82,7 +91,7 @@ class LetterOfCredit extends Component {
       <div class="LCcontainer">
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
         <div class="letterDetails">
-          <h2>{this.props.letterId}</h2>
+          <h2>{this.props.letter.letterId}</h2>
           <p>{this.props.date}</p>
         </div>
 
@@ -95,43 +104,26 @@ class LetterOfCredit extends Component {
         <br/>
 
         <div class="rules">
-            <DetailsCard type="Rules" data={this.props.rules}/>
+            <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
 
 
         <div class="actions">
-          <button onClick={this.approveLOC}>I accept the application</button>
-          <button onClick={this.rejectLOC}>I reject the application</button>
+          {/*<button onClick={this.approveLOC}>I accept the application</button>
+          <button onClick={this.rejectLOC}>I reject the application</button>*/}
+          {console.log(this.props.productDetails)}
+          <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
         </div>
       </div>
     );
   }
 }
 
-LetterOfCredit.propTypes = {
-  letterId: PropTypes.string.isRequired,
-  date: PropTypes.instanceOf(Date).isRequired,
-  applicant: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    companyName: PropTypes.string.isRequired,
-    sortCode: PropTypes.string.isRequired,
-    accNo: PropTypes.string.isRequired,
-    bankName: PropTypes.string.isRequired,
-  }).isRequired,
-  beneficiary: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    companyName: PropTypes.string.isRequired,
-    sortCode: PropTypes.string.isRequired,
-    accNo: PropTypes.string.isRequired,
-    bankName: PropTypes.string.isRequired,
-  }).isRequired,
-  productDetails: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    unitPrice: PropTypes.string.isRequired,
-    totalPrice: PropTypes.string.isRequired
-  }).isRequired,
-  rules: PropTypes.arrayOf(PropTypes.string).isRequired
+const mapStateToProps = state => {
+  console.log(state);
+  return { productDetails: state.getLetterInputReducer.productDetails, rules: state.getLetterInputReducer.rules };
 };
 
-export default LetterOfCredit;
+export default connect(mapStateToProps)(LetterOfCredit);
+
+// export default LetterOfCredit;
