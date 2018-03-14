@@ -5,13 +5,13 @@ import DetailsCard from '../DetailsCard/DetailsCard.js';
 import axios from 'axios';
 import { connect } from "react-redux";
 
+import backButtonIcon from '../../resources/images/left-arrow.svg'
+
 const productDetails = {
   productType: "Computers",
   quantity: 100,
   pricePerUnit: 100
 }
-
-import backButtonIcon from '../../resources/images/left-arrow.svg'
 
 class LetterOfCredit extends Component {
   constructor(props) {
