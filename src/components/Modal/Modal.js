@@ -11,7 +11,6 @@ class Modal extends Component {
 	}
 	
   handleClick() {
-      console.log("click");
       this.setState({
           show: false
       })

@@ -8,10 +8,14 @@ class LoCApplyCard extends Component {
         <div className="LoCCard">
           <h3>Letter of Credit Application</h3>
           <p>A letter of credit is issued by a bank to another bank (especially one in a different country) to serve as a guarantee for payments made to a specified person under specified conditions.</p>
-          <button className="viewButton applyButton">Apply for a Letter of Credit</button>
+          <button className="viewButton applyButton" onClick={this.props.callback}>Apply for a Letter of Credit</button>
         </div>
       );
     }
   }
   
+  LoCApplyCard.propTypes = {
+    callback: PropTypes.func
+  }
+
   export default LoCApplyCard;

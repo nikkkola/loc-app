@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.eLoadingSpan {
+  margin: auto;
+}
+
 .flexDiv {
   display: flex;
   flex-direction: row;
@@ -20,6 +24,10 @@
   margin: 3vh;
   font-weight: lighter;
   font-size: 90%;
+}
+
+.eUsername:hover {
+  cursor: pointer;
 }
 
 .eMenuItems {

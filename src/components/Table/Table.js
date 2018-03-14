@@ -6,25 +6,8 @@ import './table.css';
 class Table extends Component {
   constructor(props) {
 		super(props);
-		this.state = {
-			letter: {}
-		}
-  }
-
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
-		this.setState({
-			letter: nextProps.letter
-		})
 	}
-
-	generateRows() {
-		let lettersArray = this.props.letters;
-		lettersArray.map((letter) => {
-			// TODO - return a row for each letter in the array
-		});
-	}
-
+	
 	render() {
 		return(
 			<div id="tableContainer">
@@ -41,69 +24,7 @@ class Table extends Component {
 							<th>Date and Time</th>			
 							<th>Status</th>			
 						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
-						<tr>
-							<td className="blueText">{this.state.letter.letterId}</td>
-							<td>Alice Hamilton</td>
-							<td>QuickFix IT</td>
-							<td>Yesterday</td>
-							<td>{this.state.letter.status}</td>
-						</tr>
+						{this.props.rows}
 					</tbody>
 				</table>
 				<button className="viewMoreButton">View more</button>
@@ -114,7 +35,7 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-	letter: PropTypes.object
+	rows: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Table;

@@ -13,14 +13,25 @@ class BlockChainDisplay extends React.Component {
     }
   }
 
-  render()
-  {
+  render() {
     var blocks = [];
-      for (var i = 0; i < this.state.transactions.length; i++){
-        let transaction = this.state.transactions[i];
-        blocks.push(<Block transactionDetails = {transaction[0]} date = {transaction[1]} time = {transaction[2]}/>);
-      }
-    return blocks;
+    let numberOfBlocks = this.state.transactions.length;
+    for (var i = 0; i < this.state.transactions.length; i++){
+      let transaction = this.state.transactions[i];
+      let blockNumber = (i+1) + "/" + numberOfBlocks;
+      blocks.push(<Block transactionDetails = {transaction[0]} date = {transaction[1]} time = {transaction[2]} number = {blockNumber}/>);
+    }
+    return (
+      //<div className="container">
+        <div className="BlockChainDisplay">
+          {blocks}
+          <div className="greyBlock">
+            <div className="greyBlockNumber">9/9</div>
+            <div className="greyBlockLine"/>
+          </div>
+        </div>
+      //</div>
+    )
   }
 }
 
