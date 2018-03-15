@@ -13,7 +13,7 @@ class LoCApplyCard extends Component {
       );
     }
   }
-  
+
   LoCApplyCard.propTypes = {
     callback: PropTypes.func
   }
