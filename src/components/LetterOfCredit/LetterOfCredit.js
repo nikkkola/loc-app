@@ -121,7 +121,7 @@ class LetterOfCredit extends Component {
           {buttonsJSX}
         </div>
         <div class="blockChainContainer">
-          <BlockChainDisplay transactions = {transactions}/>
+          <BlockChainDisplay/>
         </div>
       </div>
     );
