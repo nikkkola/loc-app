@@ -68,14 +68,15 @@ class LetterOfCredit extends Component {
     });
   }
 
-  rejectLOC() {
+  rejectLOC(letterId) {
     this.setState({
       disableButtons: true
     });
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/RejectApplication', {
       "$class": "org.acme.loc.RejectApplication",
-      "loc": "resource:org.acme.loc.LetterOfCredit#",
-      "closeReason": "Just not that into you...",
+      "loc": letter,
+      "closeReason": "Letter has been rejected",
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.281Z"
     })
@@ -89,14 +90,15 @@ class LetterOfCredit extends Component {
     });
   }
 
-  closeLOC() {
+  closeLOC(letterId) {
     this.setState({
       disableButtons: true
     });
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/Close', {
       "$class": "org.acme.loc.Close",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
-      "closeReason": "He's dead Jim",
+      "loc": letter,
+      "closeReason": "Letter has been completed.",
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.139Z"
     })
@@ -117,23 +119,29 @@ class LetterOfCredit extends Component {
   }
 
   render() {
-    console.log(this.props.letter.productDetails);
-    console.log(this.props.productDetails);
     let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
     let productDetails = this.props.productDetails;
     let buttonsJSX = (<div/>); 
     if(!this.props.isApply) {
-      productDetails = {
-        type: this.props.letter.productDetails.productType,
-        quantity: this.props.letter.productDetails.quantity,
-        pricePerUnit: this.props.letter.productDetails.pricePerUnit
+      if(this.props.letter.status === 'APPROVED') {
+        buttonsJSX = (
+          <div class="actions">
+            <button disabled={this.state.disableButtons} onClick={() => this.closeLOC(this.props.letter.letterId)}>Close this Letter of Credit</button>
+          </div>
+        )
+      } else {
+        productDetails = {
+          type: this.props.letter.productDetails.productType,
+          quantity: this.props.letter.productDetails.quantity,
+          pricePerUnit: this.props.letter.productDetails.pricePerUnit
+        }
+        buttonsJSX = (
+          <div class="actions">
+            <button disabled={this.state.disableButtons} onClick={() => {this.approveLOC(this.props.letter.letterId, this.props.user)}}>I accept the application</button>
+            <button disabled={this.state.disableButtons} onClick={() => {this.rejectLOC(this.props.letter.letterId)}}>I reject the application</button>
+          </div>
+        );
       }
-      buttonsJSX = (
-        <div class="actions">
-          <button disabled={this.state.disableButtons} onClick={() => {this.approveLOC(this.props.letter.letterId, this.props.user)}}>I accept the application</button>
-          <button disabled={this.state.disableButtons} onClick={this.rejectLOC}>I reject the application</button>
-        </div>
-      );
     } else {
       buttonsJSX = (
         <div class="actions">
@@ -144,7 +152,6 @@ class LetterOfCredit extends Component {
  
     return (
       <div class="LCcontainer">
-        {console.log(this.props.user)}
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {this.props.callback(this.props.user)}}/>
         <div class="letterHeader">
           <div class="letterDetails">
