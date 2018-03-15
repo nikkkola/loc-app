@@ -6,6 +6,7 @@
   position: absolute;
   bottom: 0;
   /*width: 100%;*/
+  overflow: scroll;
 }
 
 .greyBlock {
@@ -22,7 +23,7 @@
   width: 4px;
   height: 25px;
   display: inline-block;
-  margin: 0 5px;
+  margin: 0 14px;
 }
 
 .greyBlockNumber {

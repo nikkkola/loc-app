@@ -121,7 +121,7 @@ class LetterOfCredit extends Component {
   render() {
     let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
     let productDetails = this.props.productDetails;
-    let buttonsJSX = (<div/>); 
+    let buttonsJSX = (<div/>);
     if(!this.props.isApply) {
       if(this.props.letter.status === 'APPROVED') {
         buttonsJSX = (
@@ -149,7 +149,7 @@ class LetterOfCredit extends Component {
         </div>
       );
     }
- 
+
     return (
       <div class="LCcontainer">
         <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {this.props.callback(this.props.user)}}/>
@@ -175,7 +175,7 @@ class LetterOfCredit extends Component {
         </div>
       </div>
     );
-  } 
+  }
 }
 
 const mapStateToProps = state => {
