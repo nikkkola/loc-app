@@ -8,12 +8,21 @@
   clear: left;
 }
 
+.letterHeader {
+  display: flex;
+  flex-direction: row;
+}
+
 .letterDetails {
   padding: 2% 0 0 2%;
 }
 
 .letterDetails > h2 {
   margin: 0;
+}
+
+.statusMessage {
+  margin-left: 82%;
 }
 
 .cardsContainer {
@@ -66,6 +75,10 @@
   margin-top: 1%;
   margin-left: 2%;
   height: 20px;
+}
+
+.backButton:hover {
+  cursor: pointer;
 }
 
 .blockChainContainer {

@@ -10,12 +10,18 @@ import backButtonIcon from '../../resources/images/left-arrow.svg'
 class LetterOfCredit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      disableButtons: false
+    }
   }
 
   createLOC(type, quantity, price, rules) {
+    this.setState({
+      disableButtons: true
+    });
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
-      "letterId": "L2",
+      "letterId": this.generateLetterId(),
       "applicant": "resource:org.acme.loc.Customer#alice",
       "beneficiary": "resource:org.acme.loc.Customer#bob",
       "rules": rules,
@@ -30,102 +36,146 @@ class LetterOfCredit extends Component {
       "timestamp": "2018-03-13T11:35:00.218Z"
     })
     .then(response => {
-      console.log(response);
+      this.setState({
+        disableButtons: false
+      })
+      this.props.callback(this.props.user);
     })
     .catch(error => {
       console.log(error);
     });
   }
 
-  approveLOC(approvingParty) {
+  approveLOC(letterId, approvingParty) {
+    this.setState({
+      disableButtons: true
+    });
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/ApproveApplication', {
       "$class": "org.acme.loc.ApproveApplication",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
+      "loc": letter,
       "approvingParty": approvingParty,
       "transactionId": "",
       "timestamp": "2018-03-13T11:25:08.043Z"
     })
+    .then(() => {
+      this.setState({
+        disableButtons: false
+      });
+    })
     .catch(error => {
       console.log(error);
     });
   }
 
-  rejectLOC() {
+  rejectLOC(letterId) {
+    this.setState({
+      disableButtons: true
+    });
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/RejectApplication', {
       "$class": "org.acme.loc.RejectApplication",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
-      "closeReason": "Just not that into you...",
+      "loc": letter,
+      "closeReason": "Letter has been rejected",
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.281Z"
     })
+    .then(() => {
+      this.setState({
+        disableButtons: false
+      });
+    })
     .catch(error => {
       console.log(error);
     });
   }
 
-  closeLOC() {
+  closeLOC(letterId) {
+    this.setState({
+      disableButtons: true
+    });
+    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
     axios.post('http://localhost:3000/api/Close', {
       "$class": "org.acme.loc.Close",
-      "loc": "resource:org.acme.loc.LetterOfCredit#L123456789",
-      "closeReason": "He's dead Jim",
+      "loc": letter,
+      "closeReason": "Letter has been completed.",
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.139Z"
+    })
+    .then(() => {
+      this.setState({
+        disableButtons: false
+      });
     })
     .catch(error => {
       console.log(error);
     })
   }
 
-  render() {
-    console.log(this.props.user);
+  generateLetterId() {
+    let id = "L" + Math.floor((Math.random() * 8999) + 1000);
+    console.log(id);
+    return id;
+  }
 
+  render() {
     let transactions = [["aaaaaa","bbbbbb","cccccc"],["dddddd","eeeeee","ffffff"],["gggggg","hhhhhh","iiiiii"]];
-    let buttonsJSX = (<div/>);
+    let productDetails = this.props.productDetails;
+    let buttonsJSX = (<div/>); 
     if(!this.props.isApply) {
-      buttonsJSX = (
-        <div>
-          <button onClick={() => {this.approveLOC(this.props.user)}}>I accept the application</button>
-          <button onClick={this.rejectLOC}>I reject the application</button>
-        </div>
-      );
+      if(this.props.letter.status === 'APPROVED') {
+        buttonsJSX = (
+          <div class="actions">
+            <button disabled={this.state.disableButtons} onClick={() => this.closeLOC(this.props.letter.letterId)}>Close this Letter of Credit</button>
+          </div>
+        )
+      } else {
+        productDetails = {
+          type: this.props.letter.productDetails.productType,
+          quantity: this.props.letter.productDetails.quantity,
+          pricePerUnit: this.props.letter.productDetails.pricePerUnit
+        }
+        buttonsJSX = (
+          <div class="actions">
+            <button disabled={this.state.disableButtons} onClick={() => {this.approveLOC(this.props.letter.letterId, this.props.user)}}>I accept the application</button>
+            <button disabled={this.state.disableButtons} onClick={() => {this.rejectLOC(this.props.letter.letterId)}}>I reject the application</button>
+          </div>
+        );
+      }
     } else {
       buttonsJSX = (
-        <div>
-          <button onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
+        <div class="actions">
+          <button disabled={this.state.disableButtons} onClick={() => this.createLOC(this.props.productDetails.type, this.props.productDetails.quantity, this.props.productDetails.pricePerUnit, this.props.rules)}>Start approval process</button>
         </div>
       );
     }
-
-
+ 
     return (
       <div class="LCcontainer">
-        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={this.props.callback}/>
-        <div class="letterDetails">
-          <h2>{this.props.letter.letterId}</h2>
-          <p>{this.props.date}</p>
+        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {this.props.callback(this.props.user)}}/>
+        <div class="letterHeader">
+          <div class="letterDetails">
+            <h2>{this.props.letter.letterId}</h2>
+            <p>{this.props.date}</p>
+          </div>
+          { this.state.disableButtons && <div class="statusMessage"> Please wait... </div> }
         </div>
-
         <div class="letterContent">
           <DetailsCard type="Person" data={["Application Request"].concat(Object.values(this.props.applicant))}/>
           <DetailsCard type="Person" data={["Supplier Request"].concat(Object.values(this.props.beneficiary))}/>
-          <DetailsCard type="Product" data={["Product Details"].concat(Object.values(this.props.productDetails))}/>
+          <DetailsCard type="Product" data={["Product Details"].concat(Object.values(productDetails))}/>
         </div>
-
         <br/>
-
         <div class="rules">
             <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
-
-        <div class="actions">
-          {buttonsJSX}
-        </div>
+        {buttonsJSX}
         <div class="blockChainContainer">
           <BlockChainDisplay/>
         </div>
       </div>
     );
-  }
+  } 
 }
 
 const mapStateToProps = state => {
