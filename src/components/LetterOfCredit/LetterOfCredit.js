@@ -19,9 +19,10 @@ class LetterOfCredit extends Component {
     this.setState({
       disableButtons: true
     });
+    let letterId = this.generateLetterId();
     axios.post('http://localhost:3000/api/InitialApplication', {
       "$class": "org.acme.loc.InitialApplication",
-      "letterId": this.generateLetterId(),
+      "letterId": letterId,
       "applicant": "resource:org.acme.loc.Customer#alice",
       "beneficiary": "resource:org.acme.loc.Customer#bob",
       "rules": rules,
@@ -35,7 +36,17 @@ class LetterOfCredit extends Component {
       "transactionId": "",
       "timestamp": "2018-03-13T11:35:00.218Z"
     })
-    .then(response => {
+    .then(() => {
+      let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId;
+      return axios.post('http://localhost:3000/api/ApproveApplication', {
+        "$class": "org.acme.loc.ApproveApplication",
+        "loc": letter,
+        "approvingParty": this.props.user,
+        "transactionId": "",
+        "timestamp": "2018-03-13T11:25:08.043Z"
+      });
+    })
+    .then(() => {
       this.setState({
         disableButtons: false
       })
@@ -47,25 +58,28 @@ class LetterOfCredit extends Component {
   }
 
   approveLOC(letterId, approvingParty) {
-    this.setState({
-      disableButtons: true
-    });
-    let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
-    axios.post('http://localhost:3000/api/ApproveApplication', {
-      "$class": "org.acme.loc.ApproveApplication",
-      "loc": letter,
-      "approvingParty": approvingParty,
-      "transactionId": "",
-      "timestamp": "2018-03-13T11:25:08.043Z"
-    })
-    .then(() => {
+    if(!this.props.letter.approval.includes(this.props.user)) {
       this.setState({
-        disableButtons: false
+        disableButtons: true
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      let letter = "resource:org.acme.loc.LetterOfCredit#" + letterId
+      axios.post('http://localhost:3000/api/ApproveApplication', {
+        "$class": "org.acme.loc.ApproveApplication",
+        "loc": letter,
+        "approvingParty": approvingParty,
+        "transactionId": "",
+        "timestamp": "2018-03-13T11:25:08.043Z"
+      })
+      .then(() => {
+        this.setState({
+          disableButtons: false
+        });
+        this.props.callback(this.props.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
   }
 
   rejectLOC(letterId) {
@@ -84,6 +98,7 @@ class LetterOfCredit extends Component {
       this.setState({
         disableButtons: false
       });
+      this.props.callback(this.props.user);
     })
     .catch(error => {
       console.log(error);
@@ -106,6 +121,7 @@ class LetterOfCredit extends Component {
       this.setState({
         disableButtons: false
       });
+      this.props.callback(this.props.user);
     })
     .catch(error => {
       console.log(error);
