@@ -12,8 +12,7 @@ class Block extends React.Component {
     };
   }
 
-  render()
-  {
+  render() {
     return (
       <div className="Block">
         <div className="BlockNumber">{this.state.number}</div>
