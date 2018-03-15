@@ -8,21 +8,12 @@
   clear: left;
 }
 
-.letterHeader {
-  display: flex;
-  flex-direction: row;
-}
-
 .letterDetails {
   padding: 2% 0 0 2%;
 }
 
 .letterDetails > h2 {
   margin: 0;
-}
-
-.statusMessage {
-  margin-left: 82%;
 }
 
 .cardsContainer {
@@ -69,6 +60,10 @@
 .actions > button:hover {
   background-color: #5f7bfd;
   color: #fff;
+}
+
+.statusMessage {
+  margin: 2.5%;
 }
 
 .backButton {

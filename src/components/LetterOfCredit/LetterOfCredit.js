@@ -168,13 +168,10 @@ class LetterOfCredit extends Component {
  
     return (
       <div class="LCcontainer">
-        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {this.props.callback(this.props.user)}}/>
-        <div class="letterHeader">
-          <div class="letterDetails">
-            <h2>{this.props.letter.letterId}</h2>
-            <p>{this.props.date}</p>
-          </div>
-          { this.state.disableButtons && <div class="statusMessage"> Please wait... </div> }
+        <img class="backButton" src={backButtonIcon} alt="image not found" onClick={() => {if(!this.state.disableButtons){this.props.callback(this.props.user)}}}/>
+        <div class="letterDetails">
+          <h2>{this.props.letter.letterId}</h2>
+          <p>{this.props.date}</p>
         </div>
         <div class="letterContent">
           <DetailsCard type="Person" data={["Application Request"].concat(Object.values(this.props.applicant))}/>
@@ -186,6 +183,7 @@ class LetterOfCredit extends Component {
             <DetailsCard type="Rules" data={["The product has been received and is as expected"]}/>
         </div>
         {buttonsJSX}
+        { this.state.disableButtons && <div class="statusMessage"> Please wait... </div> }
         <div class="blockChainContainer">
           <BlockChainDisplay/>
         </div>
